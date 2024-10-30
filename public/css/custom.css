@@ -1,0 +1,17 @@
+/* public/css/custom.css */
+
+.custom-header {
+    background-color: #e0f7f9; /* Light blue background */
+}
+
+.header-text {
+    font-size: 1.2rem; /* Adjust font size */
+    font-weight: 500; /* Adjust font weight for better readability */
+    color: #000; /* Black text color */
+}
+
+.text-end a {
+    font-size: 1rem; /* Adjust size for links */
+    font-weight: 400; /* Normal font weight */
+    color: #000; /* Black text color */
+}
