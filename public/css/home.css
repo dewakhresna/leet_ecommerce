@@ -1,0 +1,73 @@
+/* public/css/custom.css */
+
+.custom-header {
+    background-color: #cfebef;
+    padding: 1rem;
+    position: relative; /* Ensure header stays at the top */
+    z-index: 10;
+}
+
+.custom-header .header-text {
+    margin-left: 10px;
+    text-decoration: underline;
+}
+
+.custom-header .header-text a {
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.custom-navbar {
+    background-color: #ffffff;
+    padding: 0.8rem;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0; /* Navbar will stick to the top when scrolling down */
+    z-index: 9; /* Ensures navbar stays above main content but below header */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for visual separation */
+}
+
+.custom-navbar ul li a {
+    color: #000;
+}
+
+.custom-navbar a,
+.custom-header a {
+    text-decoration: none;
+}
+
+/* Ensure container padding so the navbar doesn't overlap with the header */
+.container {
+    margin-top: 1rem;
+}
+
+/* Styling when navbar is fixed */
+.is-sticky {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 8;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Shadow when sticky */
+}
+
+/* Menyesuaikan warna kontrol carousel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.5
+    ); /* Memberikan latar belakang gelap agar lebih terlihat */
+    border-radius: 50%;
+}
+
+/* Menyesuaikan warna indikator carousel */
+.carousel-indicators button {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-indicators .active {
+    background-color: #000; /* Warna indikator aktif */
+}

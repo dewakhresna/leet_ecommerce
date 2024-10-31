@@ -13,15 +13,6 @@
         </ul>
       </div>
       <div class="col-6 col-md">
-        <h5>Bantuan</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="link-secondary" href="#">FAQ</a></li>
-          <li><a class="link-secondary" href="#">Pembayaran</a></li>
-          <li><a class="link-secondary" href="#">Penukaran & Pengembalian</a></li>
-          <li><a class="link-secondary" href="#">Kebijakan Privasi</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
         <h5>Product</h5>
         <ul class="list-unstyled text-small">
           <li><a class="link-secondary" href="#">Sale</a></li>
@@ -31,6 +22,16 @@
         </ul>
       </div>
       <div class="col-6 col-md">
+        <h5>Bantuan</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">FAQ</a></li>
+          <li><a class="link-secondary" href="#">Pembayaran</a></li>
+          <li><a class="link-secondary" href="#">Penukaran & Pengembalian</a></li>
+          <li><a class="link-secondary" href="#">Kebijakan Privasi</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <img src="{{ asset('assets/logo/leet_navbar.png')}}" alt="Leet" width="50" height="50">
         <h5>Hubungi Kami</h5>
         <ul class="list-unstyled text-small">
           <li><a class="link-secondary" href="#">0812-9599-9153</a></li>
