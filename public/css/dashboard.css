@@ -1,0 +1,120 @@
+/* public/css/dashboard.css */
+
+.custom-navbar {
+    background-color: #ffffff;
+    padding: 0.8rem;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0; /* Navbar will stick to the top when scrolling down */
+    z-index: 9; /* Ensures navbar stays above main content but below header */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for visual separation */
+}
+
+.custom-navbar ul li a {
+    color: #000;
+}
+
+.custom-navbar a,
+.custom-header a {
+    text-decoration: none;
+}
+
+/* Ensure container padding so the navbar doesn't overlap with the header */
+.container {
+    margin-top: 1rem;
+}
+
+/* Styling when navbar is fixed */
+.is-sticky {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 8;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Shadow when sticky */
+}
+
+.admin-container h3 {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.admin-container form {
+    max-width: 300px;
+}
+
+.admin-container button {
+    white-space: nowrap;
+}
+
+/* Style table headers and center align text */
+table th, table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Styling Info Produk to remove frame and align image with title */
+.admin-container .info-produk {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.info-produk img {
+    width: 100px; /* Menyediakan ukuran standar untuk gambar */
+    height: auto;
+    border-radius: 5px;
+}
+
+.info-produk h5 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Dropdown styling */
+.dropdown .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.dropdown-menu {
+    min-width: 120px;
+}
+
+/* Tambah Produk */
+.tambah-produk .row .d-flex {
+    gap: 1rem; /* Menambahkan jarak antar elemen gambar */
+    flex-wrap: wrap; /* Membuat elemen dapat berpindah ke baris berikutnya jika layar sempit */
+}
+
+/* Styling untuk menampilkan gambar dalam satu baris */
+.tambah-produk .row .gambar-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.tambah-produk .gambar-wrapper > div {
+    flex: 1 1 20%; /* Membuat setiap elemen gambar memiliki lebar yang sama */
+    max-width: 25%;
+}
+
+.tambah-produk .gambar-wrapper img {
+    width: 100%; /* Sesuaikan lebar gambar agar menyesuaikan kolom */
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Styling untuk varian, input harga, dan tombol tambah dalam satu baris */
+.tambah-produk .row.varian-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tambah-produk .varian-wrapper select,
+.tambah-produk .varian-wrapper input[type="number"],
+.tambah-produk .varian-wrapper button {
+    flex: 1;
+}
