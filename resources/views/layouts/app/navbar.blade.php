@@ -15,6 +15,14 @@
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>
+
+        <a href="/home" class="d-flex align-items-center mr-2 mb-2 mb-lg-0 text-dark text-decoration-none">
+          <img src="{{ asset('assets/icon/keranjang_icon.png')}}" alt="Leet" width="30" height="30">
+        </a>
+        <a href="/home" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+          <img src="{{ asset('assets/icon/profile_icon.png')}}" alt="Leet" width="30" height="30">
+        </a>
+        
       </div>
     </div>
 </header>

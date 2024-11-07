@@ -83,6 +83,45 @@ table th, table td {
 }
 
 /* Tambah Produk */
+.tambah-produk .row {
+    align-items: center; /* Menyelaraskan elemen di dalam baris secara vertikal */
+}
+
+.tambah-produk .d-flex {
+    display: flex; /* Memastikan elemen dalam flexbox */
+    align-items: center; /* Menyelaraskan dropdown dan input secara vertikal */
+    gap: 1rem; /* Jarak antara dropdown dan input */
+}
+
+/* Styling untuk varian, input harga, dan tombol tambah dalam satu baris */
+.tambah-produk .row.varian-wrapper {
+    display: flex; /* Memastikan varian-wrapper menggunakan flexbox */
+    align-items: center; /* Menyelaraskan konten secara vertikal */
+    gap: 1rem; /* Jarak antar elemen */
+}
+
+.tambah-produk .varian-wrapper select,
+.tambah-produk .varian-wrapper input[type="number"],
+.tambah-produk .varian-wrapper button {
+    flex: 1; /* Membuat dropdown dan input tumbuh sesuai ruang yang tersedia */
+}
+
+/* Memastikan dropdown dan input tidak terlalu lebar */
+.tambah-produk .form-select,
+.tambah-produk .form-control {
+    flex: 1; /* Membuat elemen dropdown dan input tumbuh sesuai ruang yang tersedia */
+    min-width: 120px; /* Atur lebar minimum jika diperlukan */
+}
+
+.tambah-produk .form-select {
+    min-width: 120px; /* Atur lebar minimum untuk dropdown */
+}
+
+.tambah-produk .form-control {
+    min-width: 100px; /* Atur lebar minimum untuk input */
+}
+
+/* Styling untuk gambar */
 .tambah-produk .row .d-flex {
     gap: 1rem; /* Menambahkan jarak antar elemen gambar */
     flex-wrap: wrap; /* Membuat elemen dapat berpindah ke baris berikutnya jika layar sempit */
@@ -106,15 +145,25 @@ table th, table td {
     border-radius: 5px;
 }
 
-/* Styling untuk varian, input harga, dan tombol tambah dalam satu baris */
-.tambah-produk .row.varian-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.varian-item {
+    display: flex; /* Ensures items are in a row */
+    align-items: center; /* Center vertically */
+    gap: 0.5rem;
+    margin-bottom: 10px; /* Space below each varian item */
 }
 
-.tambah-produk .varian-wrapper select,
-.tambah-produk .varian-wrapper input[type="number"],
-.tambah-produk .varian-wrapper button {
-    flex: 1;
+/* Style for varian select dropdown, input, and button */
+.varian-item .form-select,
+.varian-item .form-control {
+    flex: 1; /* Allow the items to take equal space */
+    width: 125px; /* Minimum width for dropdown and input */
 }
+
+/* Button styling */
+.varian-item .btn {
+    /* /* padding: auto; */
+    font-size: 15px; 
+    /* flex-shrink: 0; Prevent the button from shrinking */
+}
+
+

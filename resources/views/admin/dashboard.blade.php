@@ -13,7 +13,7 @@
         <h3 class="m-0">Daftar Produk</h3>
 
         <!-- Add Product Button -->
-        <button class="btn btn-primary">Tambah Produk</button>
+        <button class="btn btn-primary"><a href="{{ route('admin.tambah-produk') }}" class="text-white text-decoration-none">Tambah Produk</a></button>
     </div>
 
     <table class="table table-striped table-hover">

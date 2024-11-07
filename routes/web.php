@@ -11,5 +11,6 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [UserController::class, 'index']);
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/tambah-produk', [TambahProdukController::class, 'index']);
+Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
+Route::get('admin/tambah-produk', [DashboardController::class, 'create'])->name('admin.tambah-produk');
+Route::post('admin/tambah-produk/store', [DashboardController::class, 'store'])->name('admin.tambah-produk.store');
