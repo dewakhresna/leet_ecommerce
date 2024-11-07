@@ -13,6 +13,15 @@ class Produk extends Model
         'nama_produk',
         'kategori',
         'deskripsi',
+        'gambar0',
+        'gambar1',
+        'gambar2',
+        'gambar3',
+        'stokS',
+        'stokM',
+        'stokL',
+        'stokXL',
+        'stok2XL',
         'harga',
     ];
 }

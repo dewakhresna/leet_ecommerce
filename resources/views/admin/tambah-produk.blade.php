@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <form action="{{ route('admin.tambah-produk.store') }}" method="POST" class="tambah-produk mb-5 mt-5">
+    <form action="{{ route('admin.tambah-produk.store') }}" method="POST" enctype="multipart/form-data" class="tambah-produk mb-5 mt-5">
         @csrf
         <div class="mb-3 row">
             <label for="namaProduk" class="col-sm-2 col-form-label">Nama Produk</label>
@@ -56,7 +56,7 @@
             <label for="varian" class="col-sm-2 col-form-label">Varian</label>
             <div class="col-sm-10 mb-2" id="varian-container">
                 <div class="d-flex gap-2">
-                    <select class="form-select" name="stock[]" aria-label="Default select example">
+                    <select class="form-select" name="varian[0]" aria-label="Default select example">
                         <option selected>Pilih Varian</option>
                         <option value="S">S</option>
                         <option value="M">M</option>
@@ -64,7 +64,7 @@
                         <option value="XL">XL</option>
                         <option value="2XL">2XL</option>
                     </select>
-                    <input type="number" class="form-control" name="stock[]" placeholder="Jumlah Stock">
+                    <input type="number" class="form-control" name="stok[0]" placeholder="Jumlah Stock">
                     <button type="button" class="btn btn-primary" id="tambah-varian">Tambah Varian</button>
                 </div>
                 @error('stock')
