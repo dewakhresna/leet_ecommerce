@@ -29,6 +29,21 @@
     </button>
 </div>
 <div class="row row-cols-1 row-cols-md-3 g-4 mt-3 mb-2">
+  @foreach ($produks as $index => $produk)    
+    <div class="col">
+      <div class="card h-100">
+        <img src="{{ asset('storage/assets/produk/' . $produk->gambar0) }}" alt="{{ $produk->nama_produk }}" style="width: 100px; height: 100px;" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ $produk->nama_produk }}</h5>
+          <p class="card-text">Rp. {{ $produk->harga }}</p>
+          <p class="card-text">{{ $produk->deskripsi }}</p>
+        </div>
+      </div>
+    </div>
+  @endforeach
+</div>
+
+{{-- <div class="row row-cols-1 row-cols-md-3 g-4 mt-3 mb-2">
   <div class="col">
     <div class="card h-100">
       <img src="..." class="card-img-top" alt="...">
@@ -83,6 +98,6 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 @endsection

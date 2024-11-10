@@ -117,3 +117,61 @@ document.addEventListener("DOMContentLoaded", function () {
         createVarianElement();
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Batas maksimal varian untuk edit produk
+    const maxVarianEdit = 4;
+    let varianCountEdit = 0; // Mulai dengan varian default di halaman edit
+    const tambahVarianBtnEdit = document.getElementById("tambah-varian-edit");
+    const varianContainerEdit = document.getElementById("varian-container-edit");
+
+    if (!tambahVarianBtnEdit || !varianContainerEdit) {
+        console.error("Elemen tambah-varian-edit atau varian-container-edit tidak ditemukan.");
+        return;
+    }
+
+    // Fungsi untuk membuat elemen varian baru pada halaman edit
+    function createVarianElementEdit() {
+        if (varianCountEdit < maxVarianEdit) {
+            varianCountEdit++;
+            const varianDivEdit = document.createElement("div");
+            varianDivEdit.className = "varian-item-edit mt-2";
+            varianDivEdit.id = `varian-${varianCountEdit}`; // ID unik untuk setiap varian
+            varianDivEdit.innerHTML = `
+                <select class="form-select" name="varian[${varianCountEdit}]" aria-label="Default select example">
+                    <option selected>Pilih Varian</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="2XL">2XL</option>
+                </select>
+                <input type="number" class="form-control" name="stok[${varianCountEdit}]" placeholder="Jumlah Stock">
+                <button type="button" class="btn btn-danger btn-sm hapus-varian-edit">Hapus Varian</button>
+            `;
+            varianContainerEdit.appendChild(varianDivEdit);
+
+            // Event listener untuk tombol hapus di elemen varian yang baru
+            const hapusVarianBtnEdit = varianDivEdit.querySelector(".hapus-varian-edit");
+            hapusVarianBtnEdit.addEventListener("click", function () {
+                varianDivEdit.remove();
+                // Hitung ulang jumlah elemen varian yang ada setelah dihapus
+                varianCountEdit = varianContainerEdit.querySelectorAll('.varian-item-edit').length;
+                toggleTambahVarianButtonEdit();
+            });
+
+            toggleTambahVarianButtonEdit();
+        }
+    }
+
+    // Fungsi untuk mengaktifkan/menonaktifkan tombol "Tambah Varian" pada halaman edit
+    function toggleTambahVarianButtonEdit() {
+        tambahVarianBtnEdit.disabled = varianCountEdit >= maxVarianEdit;
+    }
+
+    // Event listener untuk tombol tambah varian di halaman edit
+    tambahVarianBtnEdit.addEventListener("click", function () {
+        createVarianElementEdit();
+    });
+});

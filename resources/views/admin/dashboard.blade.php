@@ -19,36 +19,38 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>NO</th>
+                <th>No</th>
                 <th>Info Produk</th>
                 <th>Harga</th>
                 <th>Stok</th>
                 <th>Kategori</th>
                 <th>Action</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>
-                    <div class="info-produk">
-                        <img src="{{ asset('assets/gambar/sea(26).png') }}" alt="Leet T-Shirt">
-                        <h5>Leet | T-Shirt | Kaos washed | Rock This World</h5>
-                    </div>
-                </td>
-                <td>Rp. 100.000</td>
-                <td>10</td>
-                <td>Kaos</td>
-                <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Action
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="#">Edit</a></li>
-                            <li><a class="dropdown-item" href="#">Hapus</a></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
+            @foreach ($produks as $index => $produk)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>
+                        <div class="info-produk">
+                            <img src="{{ asset('storage/assets/produk/' . $produk->gambar0) }}" alt="{{ $produk->nama_produk }}" style="width: 50px; height: 50px;">
+                            <h5>{{ $produk->nama_produk }}</h5>
+                        </div>
+                    </td>
+                    <td>Rp. {{ number_format($produk->harga, 0, ',', '.') }}</td>
+                    <td>{{ $produk->stokS + $produk->stokM + $produk->stokL + $produk->stokXL + $produk->stok2XL }}</td>
+                    <td>{{ $produk->kategori }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Action
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="{{ route('admin.edit-produk', $produk->id) }}">Edit</a></li>
+                                <li><a class="dropdown-item" href="#">Hapus</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
         </thead>
   </table>
 </div>

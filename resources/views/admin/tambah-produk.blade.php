@@ -67,7 +67,7 @@
                     <input type="number" class="form-control" name="stok[0]" placeholder="Jumlah Stock">
                     <button type="button" class="btn btn-primary" id="tambah-varian">Tambah Varian</button>
                 </div>
-                @error('stock')
+                @error('stok')
                     <small>{{ $message }}</small>
                 @enderror
             </div>

@@ -12,10 +12,13 @@ class DashboardController extends Controller
 {
     public function index() 
     {
-        return view('admin.dashboard');
+        $produks = Produk::all();
+
+        return view('admin.dashboard', compact('produks'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('admin.tambah-produk');
     }
 
@@ -54,5 +57,61 @@ class DashboardController extends Controller
 
         return redirect()->route('admin')->with('success', 'Produk Berhasil');
 
+    }
+
+    public function edit($id) 
+    {
+        $produk = Produk::findorFail($id);
+
+        $varian = [
+            'S' => $produk->stokS,
+            'M' => $produk->stokM,
+            'L' => $produk->stokL,
+            'XL' => $produk->stokXL,
+            '2XL' => $produk->stok2XL,
+        ];
+
+        return view('admin.edit-produk', compact('produk', 'varian'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'namaProduk' => 'required',
+            'kategori' => 'required',
+            'deskripsi' => 'required',
+            'gambar' => 'required',
+            'varian' => 'required',
+            'stok' => 'required',
+            'harga' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+        $produk = Produk::findOrFail($id);
+        
+        // Update data produk
+        $produk->nama_produk = $request->namaProduk;
+        $produk->kategori = $request->kategori;
+        $produk->deskripsi = $request->deskripsi;
+
+        if ($request->hasFile('gambar')) {
+            foreach ($request->file('gambar') as $index => $file) {
+                $filename = date('Y-m-d_H-i-s') . '-' . $file->getClientOriginalName();
+                $file->storeAs('assets/produk', $filename, 'public');
+                $produk['gambar' . $index] = $filename;
+            }
+        }
+
+        foreach ($request->varian as $key => $sizes) {
+            $produk['stok' . $sizes] = $request->stok[$key];
+        }
+
+        $produk->harga = $request->harga;
+        $produk->save();
+
+        return redirect()->route('admin')->with('success', 'Produk Berhasil Diupdate');
     }
 }
