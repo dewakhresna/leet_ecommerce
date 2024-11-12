@@ -37,6 +37,7 @@
           <h5 class="card-title">{{ $produk->nama_produk }}</h5>
           <p class="card-text">Rp. {{ $produk->harga }}</p>
           <p class="card-text">{{ $produk->deskripsi }}</p>
+          <a href="{{ route('user.detail-produk', $produk->id) }}" class="btn btn-primary">Lihat Produk</a>
         </div>
       </div>
     </div>
