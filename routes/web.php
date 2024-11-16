@@ -20,15 +20,10 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register-proses', [AuthController::class, 'register_proses'])->name('register-proses');
 
 
-Route::get('/user/home', [HomeController::class, 'index'])->name('user.home');
-route::get('/user/home/detail-produk/{id}', [TransaksiController::class, 'detail'])->name('user.detail-produk');
+Route::get('/user/home/{id}', [HomeController::class, 'login'])->name('user.home');
 Route::get('/user/profile', [UserController::class, 'index']);
-    
-Route::get('user/pembayaran', [TransaksiController::class, 'pembayaran'])->name('user.pembayaran');
-// Route::post('user/proses-pembayaran', [TransaksiController::class, 'prosesPembayaran'])->name('user.proses-pembayaran');
-// Route::post('/transaksi/store', [TransaksiController::class, 'storeTransaksi'])->name('transaksi.store');
-
-
+route::get('/user/home/{user_id}/detail-produk/{produk_id}', [TransaksiController::class, 'detail'])->name('user.detail-produk');
+route::Post('/user/home/{user_id}/detail-produk/{produk_id}/keranjang', [TransaksiController::class, 'keranjang'])->name('user.detail-produk.keranjang');
 
 Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
 Route::get('admin/tambah-produk', [DashboardController::class, 'create'])->name('admin.tambah-produk');

@@ -75,14 +75,17 @@
                 <button class="btn btn-outline-dark size-btn">XL</button>
                 <button class="btn btn-outline-dark size-btn">2XL</button>
             </div>
-            
-            {{-- <button class="btn add-to-cart-btn mt-3 w-100"><a href="{{ route('user.tambah-keranjang', ['id' => $produk->id]) }}" class="text-white text-decoration-none">Beli</a></button> --}}
-            <form action="{{ route('user.pembayaran') }}" method="GET">
+            <form action="{{ route('user.detail-produk.keranjang', ['user_id' => $user_id, 'produk_id' => $produk_id]) }}" method="POST">
+                @csrf
+                <input type="hidden" name="user_id" value="{{ $user_id }}">
+                <input type="hidden" name="produk_id" value="{{ $produk_id }}">
                 <input type="hidden" name="nama_produk" value="{{ $produk->nama_produk }}">
                 <input type="hidden" name="kategori" value="{{ $produk->kategori }}">
                 <input type="hidden" name="gambar0" value="{{ $produk->gambar0 }}">
                 <input type="hidden" name="jumlah" id="form-quantity" value="1">
                 <input type="hidden" name="varian" id="form-varian" value="L"> <!-- Default variant -->
+                <input type="hidden" name="total_harga" id="form-total-harga" value="{{ $produk->harga }}" >
+                <input type="hidden" name="status" value="0">
                 <button type="submit" class="btn add-to-cart-btn mt-3 w-100">Beli</button>
             </form>
         </div>
@@ -123,6 +126,24 @@
             document.getElementById('form-varian').value = this.textContent; // Update hidden input
         });
     });
+
+    const hargaProduk = {{ $produk->harga }};
+    const totalHargaInput = document.getElementById('form-total-harga');
+
+    // Fungsi untuk memperbarui total harga
+    function updateTotalHarga() {
+        const jumlahItem = parseInt(quantityInput.value);
+        const totalHarga = hargaProduk * jumlahItem;
+        totalHargaInput.value = totalHarga; // Perbarui hidden input
+    }
+
+    // Memanggil fungsi setiap kali jumlah berubah
+    quantityInput.addEventListener('input', updateTotalHarga);
+    document.getElementById('btn-minus').addEventListener('click', updateTotalHarga);
+    document.getElementById('btn-plus').addEventListener('click', updateTotalHarga);
+
+    // Inisialisasi awal
+    updateTotalHarga();
 </script>
 </body>
 </html>

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 use App\Models\Produk;
-use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Store;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Termwind\Components\Dd;
 
 class TransaksiController extends Controller
 {
-    public function detail($id)
+    public function detail($user_id, $produk_id)
     {
-        $produk = Produk::findorFail($id);
+        $produk = Produk::where('id', $produk_id)->first();
         
         $varian = [
             'S' => $produk->stokS,
@@ -20,76 +21,40 @@ class TransaksiController extends Controller
             'XL' => $produk->stokXL,
             '2XL' => $produk->stok2XL,
         ];
-        return view('user.detail-produk', compact('produk', 'varian'));
+        return view('user.detail-produk', compact('produk', 'varian', 'user_id', 'produk_id'));
     }
 
-    public function pembayaran(Request $request)
+    public function keranjang(Request $request, $user_id, $produk_id)
     {
-        dd($request->all());
-
-        // $produk = Produk::findorFail($request->id_produk);
-
-        // $data = [
-        //     'id' => $request->id_user,
-        //     'name' => $request->nama_user,
-        //     'alamat' => $request->alamat,
-        //     'no_hp' => $request->no_hp,
-        //     'nama_produk' => $produk->nama_produk,
-        //     'kategori' => $produk->kategori,
-        //     'gambar0' => $produk->gambar0,
-        //     'jumlah' => $request->jumlah,
-        //     'varian' => $request->varian,
-        // ];
-
-        // return view('user.pembayaran', compact('data', 'produk'));
-    }
-
-    public function prosesPembayaran(Request $request)
-    {
-        $validated = $request->validate([
-            'metode_bayar' => 'required',
-            'bukti_bayar' => 'required',
+        // dd($request->all());
+        $check = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'produk_id' => 'required',
+            'nama_produk' => 'required',
+            'kategori' => 'required',
+            'gambar0' => 'required',
+            'jumlah' => 'required',
+            'varian' => 'required',
+            'total_harga' => 'required',
+            'status' => 'required',
         ]);
 
-        return redirect()->route('user.pembayaran')->with('success', 'Pembayaran berhasil!');
-    }
-
-    public function storeTransaksi(Request $request)
-    {
-        // Validasi data input
-        $validatedData = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'product_id' => 'required|exists:produks,id',
-            'product_name' => 'required|string',
-            'category' => 'required|string',
-            'size' => 'required|string',
-            'quantity' => 'required|integer|min:1',
-            'payment_method' => 'required|string',
-            'payment_proof' => 'required|file|mimes:jpg,png,jpeg,pdf|max:2048',
-        ]);
-
-        // Upload bukti pembayaran
-        if ($request->hasFile('payment_proof')) {
-            $paymentProofPath = $request->file('payment_proof')->store('payment_proofs', 'public/assets/payment_proofs');
-            $validatedData['payment_proof'] = $paymentProofPath;
+        if($check->fails()) {
+            return redirect()->back()->withInput()->withErrors($check);
         }
 
-        // Simpan transaksi ke database
-        Transaction::create([
-            'user_id' => $validatedData['user_id'],
-            'product_id' => $validatedData['product_id'],
-            'product_name' => $validatedData['product_name'],
-            'category' => $validatedData['category'],
-            'size' => $validatedData['size'],
-            'quantity' => $validatedData['quantity'],
-            'payment_method' => $validatedData['payment_method'],
-            'payment_proof' => $validatedData['payment_proof'],
-            'status' => 'Pending', // Status awal transaksi
-        ]);
+        $data_store['user_id'] = $request->user_id;
+        $data_store['produk_id'] = $request->produk_id;
+        $data_store['nama_produk'] = $request->nama_produk;
+        $data_store['kategori'] = $request->kategori;
+        $data_store['gambar0'] = $request->gambar0;
+        $data_store['jumlah'] = $request->jumlah;
+        $data_store['varian'] = $request->varian;
+        $data_store['total_harga'] = $request->total_harga;
+        $data_store['status'] = $request->status;
 
-        return redirect()->route('user.transactions')->with('success', 'Transaksi berhasil disimpan!');
-    }   
+        Store::create($data_store);
 
-
-
+        return redirect()->route('user.home', ['id' => $user_id]);
+    }
 }

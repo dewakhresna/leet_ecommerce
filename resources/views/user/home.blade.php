@@ -10,14 +10,14 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{{ asset('assets/gambar/sea(22).png')}}" class="d-block w-100" alt="...">
+        <img src="{{ asset('assets/gambar/banner_1.png')}}" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="{{ asset('assets/gambar/sea(24).png')}}" class="d-block w-100" alt="...">
+        <img src="{{ asset('assets/gambar/banner_2.png')}}" class="d-block w-100" alt="...">
       </div>
-      <div class="carousel-item">
+      {{-- <div class="carousel-item">
         <img src="{{ asset('assets/gambar/sea(26).png')}}" class="d-block w-100" alt="...">
-      </div>
+      </div> --}}
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -37,7 +37,7 @@
           <h5 class="card-title">{{ $produk->nama_produk }}</h5>
           <p class="card-text">Rp. {{ $produk->harga }}</p>
           <p class="card-text">{{ $produk->deskripsi }}</p>
-          <a href="{{ route('user.detail-produk', $produk->id) }}" class="btn btn-primary">Lihat Produk</a>
+          <a href="{{ route('user.detail-produk', ['user_id' => $user->id, 'produk_id' => $produk->id]) }}" class="btn btn-primary">Lihat Produk</a>
         </div>
       </div>
     </div>
