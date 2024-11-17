@@ -15,9 +15,13 @@
           <a href="#" class="text-dark text-decoration-none ms-2">sign up</a>
         </div> --}}
         <div class="text-end">
-          <a href="" class="text-dark text-decoration-none me-2" data-bs-toggle="modal" data-bs-target="#signIn">sign in</a>
-          <span class="text-dark">/</span>
-          <a href="#" class="text-dark text-decoration-none ms-2" data-bs-toggle="modal" data-bs-target="#signUp">sign up</a>
+            @if(Auth::check())
+                <a href="{{ route('user.profile', Auth::user()->id) }}" class="text-dark text-decoration-none me-2">Hi {{ Auth::user()->name }}</a>
+            @else
+                <a href="" class="text-dark text-decoration-none me-2" data-bs-toggle="modal" data-bs-target="#signIn">sign in</a>
+                <span class="text-dark">/</span>
+                <a href="#" class="text-dark text-decoration-none ms-2" data-bs-toggle="modal" data-bs-target="#signUp">sign up</a>
+            @endif
         </div>
       </div>
     </div>

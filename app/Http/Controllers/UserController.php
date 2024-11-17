@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        return view('user.profile');
+        $user = User::findorFail($id);
+        return view('user.profile' , compact('user'));
     }
 }

@@ -24,7 +24,7 @@ class TransaksiController extends Controller
         return view('user.detail-produk', compact('produk', 'varian', 'user_id', 'produk_id'));
     }
 
-    public function keranjang(Request $request, $user_id, $produk_id)
+    public function tambahKeranjang(Request $request, $user_id, $produk_id)
     {
         // dd($request->all());
         $check = Validator::make($request->all(), [
@@ -56,5 +56,41 @@ class TransaksiController extends Controller
         Store::create($data_store);
 
         return redirect()->route('user.home', ['id' => $user_id]);
+    }
+
+
+    public function keranjang($user_id) 
+    {
+        $keranjang = Store::where('user_id', $user_id)
+                          ->where('status', '0')
+                          ->get();
+
+        return view('user.keranjang', compact('keranjang', 'user_id'));
+    }
+
+    public function isiKeranjang($user_id) 
+    {
+        $keranjang = Store::where('user_id', $user_id)
+                          ->where('status', '0')
+                          ->get()
+                          ->map(function ($item) {
+                            $item->gambar0 = asset('storage/assets/produk/' . $item->gambar0);
+                            return $item;
+                        });
+
+        return response()->json($keranjang);
+    }
+
+    public function checkout(Request $request) 
+    {
+        $request->validate([
+            'produk' => 'required|array',
+            'produk.*' => 'integer|exists:stores,id',
+        ]);
+    
+        Store::whereIn('id', $request->produk)
+             ->update(['status' => '1']);
+    
+        return response()->json(['message' => 'Checkout berhasil']);
     }
 }

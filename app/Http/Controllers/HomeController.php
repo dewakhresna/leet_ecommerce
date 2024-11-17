@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         $produks = Produk::all();
-        return view('user.home', compact('user', 'produks'));
+        return view('user.home', compact('produks'));
     }
 
     public function login($id)
@@ -19,5 +19,12 @@ class HomeController extends Controller
         $user = User::findorFail($id);
         $produks = Produk::all();
         return view('user.home', compact('user', 'produks'));
+    }
+
+    public function produk($id)
+    {
+        $user = User::findorFail($id);
+        $produks = Produk::all();
+        return view('user.produk', compact('user', 'produks'));
     }
 }
