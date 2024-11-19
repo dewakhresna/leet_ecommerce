@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -113,5 +115,34 @@ class DashboardController extends Controller
         $produk->save();
 
         return redirect()->route('admin')->with('success', 'Produk Berhasil Diupdate');
+    }
+
+    public function showLoginForm()
+    {
+        return view('admin.admin-login');
+    }
+    
+    public function loginAdmin(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('admin')->attempt($credentials)) {
+            return redirect()->route('admin'); // Ganti dengan route dashboard admin
+        }
+
+        return back()->withErrors([
+            'email' => 'Email atau password salah.',
+        ]);
+    }
+
+    public function logoutAdmin()
+    {
+        Auth::guard('admin')->logout();
+        return redirect()->route('home')->with('success', 'Logout Berhasil');
+    }
+
+    public function profile()
+    {
+        return view('admin.profile', compact('admin'));
     }
 }

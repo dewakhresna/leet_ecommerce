@@ -6,7 +6,12 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#beranda" class="nav-link px-2 link-dark">Beranda</a></li>
+          
+          @if(Auth::check())
+            <li><a href="{{ route('user.home', Auth::user()->id)}}#beranda" class="nav-link px-2 link-dark">Beranda</a></li>
+          @else
+            <li><a href="#beranda" class="nav-link px-2 link-dark">Beranda</a></li>
+          @endif
           
           @if(Auth::check())
             <li><a href="{{ route('user.produk', Auth::user()->id)}}" class="nav-link px-2 link-dark">Produk</a></li>
@@ -14,8 +19,17 @@
             <li><a href="#" data-bs-toggle="modal" data-bs-target="#signIn" class="nav-link px-2 link-dark">Produk</a></li>
           @endif
 
-          <li><a href="#about" class="nav-link px-2 link-dark">Tentang</a></li>
-          <li><a href="#lokasi" class="nav-link px-2 link-dark">Lokasi</a></li>
+          @if(Auth::check())
+            <li><a href="{{ route('user.home', Auth::user()->id)}}#about" class="nav-link px-2 link-dark">Tentang</a></li>
+          @else
+            <li><a href="#about" class="nav-link px-2 link-dark">Tentang</a></li>
+          @endif
+
+          @if(Auth::check())
+            <li><a href="{{ route('user.home', Auth::user()->id)}}#lokasi" class="nav-link px-2 link-dark">Lokasi</a></li>
+          @else
+            <li><a href="#lokasi" class="nav-link px-2 link-dark">Lokasi</a></li>
+          @endif
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">

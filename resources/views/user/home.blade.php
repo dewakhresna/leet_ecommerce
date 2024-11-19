@@ -50,8 +50,8 @@
   @endforeach
 </div>
 
-<section id="about" class="mt-4">
-  <h2>Hi, LEET disini</h2>
+<section id="about" class="mt-5 mb-5">
+  <h1 class="text-center">Hi, LEET disini</h1>
   <p>
     Leet adalah brand clothing Indonesia yang mengedepankan gaya, kenyamanan, dan kreativitas.
     Dengan desain fresh dan edgy, Leet menawarkan koleksi pakaian berkualitas tinggi untuk
@@ -63,7 +63,7 @@
 <section id="lokasi" class="mt-5">
   <div class="container">
     <div class="row mb-5 align-items-center">
-        <!-- Bandung -->
+      <h1 class="text-center mb-5">Lokasi Kami</h1>
         <div class="col-md-8">
             <div class="map-container">
                 <iframe
@@ -90,7 +90,6 @@
     </div>
 
     <div class="row align-items-center">
-        <!-- Jakarta -->
         <div class="col-md-8">
             <div class="map-container">
                 <iframe

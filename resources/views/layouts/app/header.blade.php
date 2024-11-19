@@ -6,7 +6,13 @@
           {{-- <a href="/" class="d-flex align-items-center text-dark text-decoration-none me-2">
             <img src="{{ asset('assets/logo/logo_leet.png') }}" alt="Logo" width="30" height="30" class="logo-img">
           </a> --}}
-          <span class="header-text status"><a href="#">Status Pesanan</a></span>
+          {{-- <span class="header-text status"><a href="#">Status Pesanan</a></span> --}}
+
+          @if(Auth::check())
+            <span class="header-text status"><a href="{{ route('user.pesanan', Auth::user()->id) }}" class="text-decoration-none">Status Pesanan</a></span>
+          @else
+            <span class="header-text status"><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#signIn">Status Pesanan</a></span>
+          @endif
         </div>
 
         {{-- <div class="text-end">

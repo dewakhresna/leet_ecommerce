@@ -10,6 +10,10 @@
           <li><a href="#" class="nav-link px-2 link-dark">Produk</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Transaksi</a></li>
         </ul>
+
+        <a href="{{ route('user.profile', Auth::admin()->id)}}" class="d-flex align-items-center mr-2 mb-2 mb-lg-0 text-dark text-decoration-none">
+          <img src="{{ asset('assets/icon/profile_icon.png')}}" alt="Leet" width="30" height="30">
+        </a>
       </div>
     </div>
 </header>

@@ -19,5 +19,7 @@ class Store extends Model
         'varian',
         'total_harga',
         'status',
+        'metode_pembayaran',
+        'bukti_pembayaran',
     ];
 }

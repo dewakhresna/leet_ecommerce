@@ -42,7 +42,7 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h2 class="text-center">Account Saya</h2>
+        <h2 class="text-center">Account Admin</h2>
         <div class="row">
             <div class="col-md-6">
                 <div class="new-arrivals">
@@ -62,22 +62,12 @@
             </div>
             <div class="col-md-6">
                 <div class="profile-header">
-                    <img src="{{ $user->foto_profile ? asset('storage/' . $user->foto_profile) : asset("assets/icon/profile_icon.png") }}" alt="Profile Picture">
+                    <img src="{{ asset("assets/icon/profile_icon.png") }}" alt="Profile Picture">
                     <div>
-                        <h5>{{ $user->name }}</h5>
-                        <p>{{ $user->email }}</p>
-                        <p>{{ $user->no_hp }}</p>
-                        <a href="{{route('logout')}}" class="text-danger">Keluar</a>
+                        <h5>{{ $admin->name }}</h5>
+                        <p>{{ $admin->email }}</p>
+                        <a href="{{route('admin.logout')}}" class="text-danger">Keluar</a>
                     </div>
-                </div>
-                <p><strong>Alamat:</strong> {{ $user->alamat }}</p>
-                <div class="action-links">
-                    <a href="#">
-                        <img src="{{asset('assets/icon/transaksi_icon.png')}}" alt="Cart" width="30"> Detail Transaksi
-                    </a>
-                    <a href="#">
-                        <img src="{{asset('assets/icon/map_icon.png')}}" alt="Map" width="30"> Status Pesanan
-                    </a>
                 </div>
             </div>
         </div>

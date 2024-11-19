@@ -101,6 +101,7 @@
             .done(function (response) {
                 alert(response.message);
                 loadKeranjang(); // Refresh data keranjang
+                window.location.href = `/user/home/${userId}/pembayaran`;
             })
             .fail(function (error) {
                 alert(error.responseJSON.message || 'Terjadi kesalahan saat checkout!');

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('varian');
             $table->integer('total_harga');
             $table->string('status');
+            $table->string('metode_pembayaran')->nullable();
+            $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();
         });
     }

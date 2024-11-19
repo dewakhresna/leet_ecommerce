@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+
 class AuthController extends Controller
 {
     public function login_proses(Request $request)

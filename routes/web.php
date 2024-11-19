@@ -25,14 +25,24 @@ Route::get('/user/produk/{id}', [HomeController::class, 'produk'])->name('user.p
 Route::get('/user/profile/{id}', [UserController::class, 'index'])->name('user.profile');
 
 
-route::get('/user/home/{user_id}/detail-produk/{produk_id}', [TransaksiController::class, 'detail'])->name('user.detail-produk');
-route::Post('/user/home/{user_id}/detail-produk/{produk_id}/tambah-keranjang', [TransaksiController::class, 'tambahKeranjang'])->name('user.detail-produk.keranjang');
+Route::get('/user/home/{user_id}/detail-produk/{produk_id}', [TransaksiController::class, 'detail'])->name('user.detail-produk');
+Route::Post('/user/home/{user_id}/detail-produk/{produk_id}/tambah-keranjang', [TransaksiController::class, 'tambahKeranjang'])->name('user.detail-produk.keranjang');
 
-route::get('/user/home/{user_id}/keranjang', [TransaksiController::class, 'keranjang'])->name('user.keranjang');
+Route::get('/user/home/{user_id}/keranjang', [TransaksiController::class, 'keranjang'])->name('user.keranjang');
 Route::get('api/user/{user_id}/keranjang', [TransaksiController::class, 'isiKeranjang']);
 Route::post('/checkout', [TransaksiController::class, 'checkout']);
 
-Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
+Route::get('/user/home/{user_id}/pembayaran', [TransaksiController::class, 'pembayaran'])->name('user.pembayaran');
+Route::post('/user/home/{user_id}/pembayaran-proses', [TransaksiController::class, 'pembayaranProses'])->name('user.pembayaran-proses');
+
+Route::get('/user/home/{user_id}/pesanan', [TransaksiController::class, 'pesanan'])->name('user.pesanan');
+
+Route::get('/admin-login', [DashboardController::class, 'showLoginForm'])->name('admin.admin-login');
+Route::post('/admin/login-proses', [DashboardController::class, 'loginadmin'])->name('admin.admin-login-proses');
+Route::get('/admin/logout', [DashboardController::class, 'logoutAdmin'])->name('admin.logout');
+
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin');
+Route::get('/admin/profile', [DashboardController::class, 'profile'])->name('admin.profile');
 Route::get('admin/tambah-produk', [DashboardController::class, 'create'])->name('admin.tambah-produk');
 Route::post('admin/tambah-produk/store', [DashboardController::class, 'store'])->name('admin.tambah-produk.store');
 Route::get('admin/edit-produk/{id}', [DashboardController::class, 'edit'])->name('admin.edit-produk');

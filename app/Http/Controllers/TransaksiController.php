@@ -93,4 +93,50 @@ class TransaksiController extends Controller
     
         return response()->json(['message' => 'Checkout berhasil']);
     }
+
+    public function pembayaran($user_id)
+    {
+        $store = Store::where('user_id', $user_id)
+                      ->where('status', '1')
+                      ->get()
+                      ->map(function ($item) {
+                        $item->gambar0 = asset('storage/assets/produk/' . $item->gambar0);
+                        return $item;
+                    });
+
+        $user = User::where('id', $user_id)->first();
+        
+        return view('user.pembayaran', compact('user_id', 'store', 'user'));
+    }
+
+    public function pembayaranProses(Request $request, $user_id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'metode_pembayaran' => 'required|string',
+            'bukti_pembayaran' => 'required|file|mimes:jpeg,png,jpg',
+        ]);
+
+        $filename = null; 
+    
+        // Upload bukti pembayaran
+        if ($request->hasFile('bukti_bayar')) {
+            $file = $request->file('bukti_bayar');
+            $filename = date('Y-m-d_H-i-s') . '_' . $file->getClientOriginalName(); // Generate nama unik
+            $file->storeAs('public/bukti_bayar', $filename); // Simpan ke folder 'storage/app/public/bukti_bayar'
+        }
+
+        Store::where('user_id', $user_id)
+             ->where('status', '1')
+             ->update(['status' => '2', 'metode_pembayaran' => $request->metode_pembayaran, 'bukti_pembayaran' => $filename]);
+    
+        return redirect()->route('user.home', ['id' => $user_id])
+                         ->with('success', 'Pembayaran berhasil diproses!');
+    }
+
+    public function pesanan($user_id)
+    {
+        $stores = Store::all();
+        return view('user.pesanan', compact('user_id', 'stores'));
+    }
 }
