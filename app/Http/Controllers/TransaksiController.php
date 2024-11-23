@@ -116,14 +116,12 @@ class TransaksiController extends Controller
             'metode_pembayaran' => 'required|string',
             'bukti_pembayaran' => 'required|file|mimes:jpeg,png,jpg',
         ]);
-
-        $filename = null; 
     
         // Upload bukti pembayaran
-        if ($request->hasFile('bukti_bayar')) {
-            $file = $request->file('bukti_bayar');
+        if ($request->file('bukti_pembayaran')) {
+            $file = $request->file('bukti_pembayaran');
             $filename = date('Y-m-d_H-i-s') . '_' . $file->getClientOriginalName(); // Generate nama unik
-            $file->storeAs('public/bukti_bayar', $filename); // Simpan ke folder 'storage/app/public/bukti_bayar'
+            $file->storeAs('assets/bukti_pembayaran', $filename, 'public'); // Simpan ke folder 'storage/app/public/bukti_bayar'
         }
 
         Store::where('user_id', $user_id)
@@ -136,7 +134,16 @@ class TransaksiController extends Controller
 
     public function pesanan($user_id)
     {
-        $stores = Store::all();
+        $stores = Store::where('user_id', $user_id)
+                        ->where('status', '!=', '0')
+                        ->get();
+
         return view('user.pesanan', compact('user_id', 'stores'));
+    }
+
+    public function destroy($user_id, $id)
+    {
+        Store::where('id', $id)->delete();
+        return redirect()->route('user.pesanan', ['user_id' => $user_id]);
     }
 }

@@ -16,34 +16,48 @@
         h3 {
             text-align: center;
             margin-bottom: 20px;
-            color: #333;
+            color: #343a40;
+        }
+        .container {
+            margin-top: 20px;
         }
         .info-produk {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
         .info-produk h5 {
             margin: 0;
             font-size: 1rem;
+            font-weight: bold;
         }
         table {
             background-color: #fff;
             border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
         table img {
             border-radius: 5px;
             object-fit: cover;
+            width: 60px;
+            height: 60px;
         }
         table thead th {
             background-color: #343a40;
             color: #fff;
             text-align: center;
+            font-size: 0.9rem;
+            text-transform: uppercase;
         }
         table tbody td {
             text-align: center;
             vertical-align: middle;
+            font-size: 0.9rem;
+        }
+        .badge {
+            font-size: 0.85rem;
+            text-transform: uppercase;
         }
         .btn-primary a {
             color: #fff;
@@ -51,6 +65,12 @@
         }
         .btn-primary a:hover {
             text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
         }
     </style>
 </head>
@@ -76,7 +96,7 @@
                         <td>{{ $index + 1 }}</td>
                         <td>
                             <div class="info-produk">
-                                <img src="{{ asset('storage/assets/produk/' . $store->gambar0) }}" alt="{{ $store->nama_produk }}" style="width: 50px; height: 50px;">
+                                <img src="{{ asset('storage/assets/produk/' . $store->gambar0) }}" alt="{{ $store->nama_produk }}">
                                 <h5>{{ $store->nama_produk }}</h5>
                             </div>
                         </td>
@@ -84,12 +104,21 @@
                         <td>{{ $store->jumlah }}</td>
                         <td>{{ $store->varian }}</td>
                         <td>{{ $store->kategori }}</td>
-                        <td>{{ $store->metode_pembayaran }}</td>
                         <td>
                             @if ($store->status == 1)
-                                <span class="badge bg-warning text-dark"><a href="{{ route('user.pembayaran', $store->user_id) }}" class="btn btn-primary btn-sm">Lakukan Pembayaran</a></span>
+                                <span class="badge bg-warning text-dark">Menunggu Pembayaran</span>
                             @elseif ($store->status == 2)
-                                <span class="badge bg-success">Pembayaran Berhasil</span>
+                                {{ $store->metode_pembayaran }}
+                            @else
+                                <span class="badge bg-danger">-</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($store->status == 1)
+                                <a href="{{ route('user.pembayaran', $store->user_id) }}" class="btn btn-primary btn-sm">Lakukan Pembayaran</a>
+                                <a href="{{ route('user.pesanan-delete', ['user_id' => $store->user_id, 'id' => $store->id]) }}" class="btn btn-danger btn-sm">Hapus Pesanan</a>
+                            @elseif ($store->status == 2)
+                                <span class="badge bg-success">Pembayaran Sedang Diproses</span>
                             @else
                                 <span class="badge bg-danger">Ditolak</span>
                             @endif

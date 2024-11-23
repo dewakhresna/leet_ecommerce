@@ -75,6 +75,7 @@
                     <th>Varian</th>
                     <th>Kategori</th>
                     <th>Metode Pembayaran</th>
+                    <th>Bukti Pembayaran</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -95,11 +96,12 @@
                         <td>{{ $store->varian }}</td>
                         <td>{{ $store->kategori }}</td>
                         <td>{{ $store->metode_pembayaran }}</td>
+                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#buktiPembayaranModal">Lihat</button></td>
                         <td>
                             @if ($store->status == 1)
                                 <span class="badge bg-warning text-dark">Pembayaran Belum Dilakukan</span>
                             @elseif ($store->status == 2)
-                                <span class="badge bg-success">Pembayaran Berhasil</span>
+                                <span class="badge bg-success">Pembayaran Sudah Dilakukan</span>
                             @else
                                 <span class="badge bg-danger">Ditolak</span>
                             @endif
@@ -108,6 +110,22 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="modal fade" id="buktiPembayaranModal" tabindex="-1" aria-labelledby="buktiPembayaranModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="buktiPembayaranModalLabel">Bukti Pembayaran</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <img src="{{ asset('storage/assets/bukti_pembayaran/' . $store->bukti_pembayaran) }}" alt="Bukti Pembayaran" class="img-fluid">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

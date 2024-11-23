@@ -35,7 +35,7 @@ Route::get('/user/home/{user_id}/pembayaran', [TransaksiController::class, 'pemb
 Route::post('/user/home/{user_id}/pembayaran-proses', [TransaksiController::class, 'pembayaranProses'])->name('user.pembayaran-proses');
 
 Route::get('/user/home/{user_id}/pesanan', [TransaksiController::class, 'pesanan'])->name('user.pesanan');
-Route::get('/user/home/{user_id}/pesanan/delete-pesanan/{id}', [TransaksiController::class, 'destroy'])->name('user.pesanan.delete');
+Route::get('/user/home/{user_id}/pesanan/delete-pesanan/{id}', [TransaksiController::class, 'destroy'])->name('user.pesanan-delete');
 
 Route::get('/admin/login', function () {
     return view('admin.admin-login');

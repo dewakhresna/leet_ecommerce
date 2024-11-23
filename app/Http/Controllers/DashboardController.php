@@ -14,7 +14,8 @@ class DashboardController extends Controller
 {
     public function transaksi()
     {
-        $stores = Store::all();
+        $stores = Store::where('status', '!=', '0')
+                        ->get();
         return view('admin.admin-transaksi', compact('stores'));
     }
     
