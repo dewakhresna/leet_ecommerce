@@ -15,22 +15,25 @@
         }
         h3 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             color: #333;
+            font-weight: bold;
         }
         .info-produk {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
         .info-produk h5 {
             margin: 0;
             font-size: 1rem;
+            color: #495057;
         }
         table {
             background-color: #fff;
             border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         table img {
             border-radius: 5px;
@@ -42,7 +45,6 @@
             text-align: center;
         }
         table tbody td {
-            text-align: center;
             vertical-align: middle;
         }
         .btn-primary a {
@@ -52,15 +54,21 @@
         .btn-primary a:hover {
             text-decoration: underline;
         }
+        .badge {
+            font-size: 0.875rem;
+            padding: 5px 10px;
+        }
     </style>
 </head>
 <body>
-    <h3>Pesanan Anda</h3>
+    <h3>Daftar Transaksi</h3>
     <div class="container">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Id Pembeli</th>
+                    <th>Id Produk</th>
                     <th>Info Produk</th>
                     <th>Harga</th>
                     <th>Jumlah</th>
@@ -74,6 +82,8 @@
                 @foreach ($stores as $index => $store)
                     <tr>
                         <td>{{ $index + 1 }}</td>
+                        <td>{{ $store->user_id }}</td>
+                        <td>{{ $store->produk_id }}</td>
                         <td>
                             <div class="info-produk">
                                 <img src="{{ asset('storage/assets/produk/' . $store->gambar0) }}" alt="{{ $store->nama_produk }}" style="width: 50px; height: 50px;">
@@ -87,7 +97,7 @@
                         <td>{{ $store->metode_pembayaran }}</td>
                         <td>
                             @if ($store->status == 1)
-                                <span class="badge bg-warning text-dark"><a href="{{ route('user.pembayaran', $store->user_id) }}" class="btn btn-primary btn-sm">Lakukan Pembayaran</a></span>
+                                <span class="badge bg-warning text-dark">Pembayaran Belum Dilakukan</span>
                             @elseif ($store->status == 2)
                                 <span class="badge bg-success">Pembayaran Berhasil</span>
                             @else

@@ -3,10 +3,6 @@
       <div class="d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
           <img src="{{ asset('assets/logo/logo_leet.png') }}" alt="Logo" width="30" height="30" class="logo-img">
-          {{-- <a href="/" class="d-flex align-items-center text-dark text-decoration-none me-2">
-            <img src="{{ asset('assets/logo/logo_leet.png') }}" alt="Logo" width="30" height="30" class="logo-img">
-          </a> --}}
-          {{-- <span class="header-text status"><a href="#">Status Pesanan</a></span> --}}
 
           @if(Auth::check())
             <span class="header-text status"><a href="{{ route('user.pesanan', Auth::user()->id) }}" class="text-decoration-none">Status Pesanan</a></span>
@@ -15,11 +11,6 @@
           @endif
         </div>
 
-        {{-- <div class="text-end">
-          <a href="#" class="text-dark text-decoration-none me-2">sign in</a>
-          <span class="text-dark">/</span>
-          <a href="#" class="text-dark text-decoration-none ms-2">sign up</a>
-        </div> --}}
         <div class="text-end">
             @if(Auth::check())
                 <a href="{{ route('user.profile', Auth::user()->id) }}" class="text-dark text-decoration-none me-2">Hi {{ Auth::user()->name }}</a>
@@ -114,9 +105,3 @@
       </div>
   </div>
 </div>
-
-{{-- @if($message = Session::get('failed'))
-    <script>
-        Swal.fire('{{ $message }}');
-    </script>
-@endif --}}

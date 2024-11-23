@@ -3,10 +3,9 @@
 
 @section('content')
 <div class="admin-container">
-    <div class="d-flex align-items-center justify-content-between mt-5 mb-1">
+    <div class="d-flex align-items-center justify-content-between mt-5 mb-3">
         <!-- Search Form -->
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-            <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>
 
         <!-- Center Title -->
@@ -16,7 +15,7 @@
         <button class="btn btn-primary"><a href="{{ route('admin.tambah-produk') }}" class="text-white text-decoration-none">Tambah Produk</a></button>
     </div>
 
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover mb-5">
         <thead>
             <tr>
                 <th>No</th>
@@ -45,7 +44,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <li><a class="dropdown-item" href="{{ route('admin.edit-produk', $produk->id) }}">Edit</a></li>
-                                <li><a class="dropdown-item" href="#">Hapus</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.delete-produk', $produk->id) }}">Hapus</a></li>
                             </ul>
                         </div>
                     </td>

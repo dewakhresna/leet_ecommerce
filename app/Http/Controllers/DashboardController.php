@@ -4,14 +4,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use App\Models\Store;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    public function transaksi()
+    {
+        $stores = Store::all();
+        return view('admin.admin-transaksi', compact('stores'));
+    }
+    
     public function index() 
     {
         $produks = Produk::all();
@@ -117,32 +123,19 @@ class DashboardController extends Controller
         return redirect()->route('admin')->with('success', 'Produk Berhasil Diupdate');
     }
 
-    public function showLoginForm()
+    public function destroy($id)
     {
-        return view('admin.admin-login');
+        $produk = Produk::findOrFail($id);
+        $produk->delete();
+        return redirect()->route('admin')->with('success', 'Produk Berhasil Dihapus');
     }
-    
-    public function loginAdmin(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('admin'); // Ganti dengan route dashboard admin
+    public function login(Request $request)
+    {
+        if ($request->email === 'admin@gmail.com' && $request->password === '123') {
+            return redirect()->route('admin');
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ]);
-    }
-
-    public function logoutAdmin()
-    {
-        Auth::guard('admin')->logout();
-        return redirect()->route('home')->with('success', 'Logout Berhasil');
-    }
-
-    public function profile()
-    {
-        return view('admin.profile', compact('admin'));
+        return back()->withErrors(['email' => 'Invalid email or password.']);
     }
 }

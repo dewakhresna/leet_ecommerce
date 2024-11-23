@@ -28,6 +28,5 @@
         @include('layouts.app.footer')
     </div>
 
-    
 </body>
 </html>

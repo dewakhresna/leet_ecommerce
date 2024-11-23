@@ -31,10 +31,6 @@
             <li><a href="#lokasi" class="nav-link px-2 link-dark">Lokasi</a></li>
           @endif
         </ul>
-
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-        </form>
         
         @if(Auth::check())
         <a href="/user/home/{user_id}/keranjang" class="d-flex align-items-center mr-2 mb-2 mb-lg-0 text-dark text-decoration-none">

@@ -42,7 +42,7 @@
 <body>
     <div class="login-container">
         <h2>Admin Login</h2>
-        <form id="adminLoginForm" action="{{ route('admin.admin-login-proses') }}" method="POST">
+        <form id="adminLoginForm" action="{{ url('/admin/login') }}" method="POST">
             @csrf
             <!-- Email Input -->
             <div class="mb-3">
@@ -61,9 +61,13 @@
         </form>
 
         <!-- Error Alert -->
-        <div class="alert alert-danger mt-3" id="errorAlert">
-            Invalid email or password. Please try again.
-        </div>
+        @if ($errors->any())
+            <div class="alert alert-danger mt-3">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -55,10 +55,6 @@
                             <option value="Kartu Kredit">Kartu Kredit</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="bukti_pembayaran" class="form-label">Upload Bukti Pembayaran</label>
-                        <input type="file" class="form-control" name="bukti_pembayaran" id="bukti_pembayaran" required>
-                    </div>
                     <button type="submit" class="btn btn-primary w-100">Bayar</button>
                 </form>
             </div>

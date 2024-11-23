@@ -72,10 +72,10 @@
                 </div>
                 <p><strong>Alamat:</strong> {{ $user->alamat }}</p>
                 <div class="action-links">
-                    <a href="#">
+                    <a href="{{ route('user.keranjang', Auth::user()->id)}}">
                         <img src="{{asset('assets/icon/transaksi_icon.png')}}" alt="Cart" width="30"> Detail Transaksi
                     </a>
-                    <a href="#">
+                    <a href="{{ route('user.pesanan', Auth::user()->id)}}">
                         <img src="{{asset('assets/icon/map_icon.png')}}" alt="Map" width="30"> Status Pesanan
                     </a>
                 </div>
