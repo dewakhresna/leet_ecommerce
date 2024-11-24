@@ -88,6 +88,7 @@
                     <th>Kategori</th>
                     <th>Metode Pembayaran</th>
                     <th>Status</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -105,22 +106,31 @@
                         <td>{{ $store->varian }}</td>
                         <td>{{ $store->kategori }}</td>
                         <td>
-                            @if ($store->status == 1)
-                                <span class="badge bg-warning text-dark">Menunggu Pembayaran</span>
-                            @elseif ($store->status == 2)
+                            @if ($store->pesan == 2)
+                                {{ $store->metode_pembayaran }}
+                            @elseif ($store->pesan == 3)
                                 {{ $store->metode_pembayaran }}
                             @else
-                                <span class="badge bg-danger">-</span>
+                                -
+                            @endif
+                        </td>
+                        <td>
+                            @if ($store->pesan == 1)
+                                <span class="badge bg-warning">Menunggu Pembayaran</span>
+                            @elseif ($store->pesan == 2)
+                                <span class="badge bg-success">Pembayaran Sedang Diproses</span>
+                            @elseif ($store->pesan == 3)
+                                <span class="badge bg-success">Pesanan Dikirim Menuju Alamat Anda</span>
+                            @else
+                                <span class="badge bg-danger">Ditolak</span>
                             @endif
                         </td>
                         <td>
                             @if ($store->status == 1)
                                 <a href="{{ route('user.pembayaran', $store->user_id) }}" class="btn btn-primary btn-sm">Lakukan Pembayaran</a>
                                 <a href="{{ route('user.pesanan-delete', ['user_id' => $store->user_id, 'id' => $store->id]) }}" class="btn btn-danger btn-sm">Hapus Pesanan</a>
-                            @elseif ($store->status == 2)
-                                <span class="badge bg-success">Pembayaran Sedang Diproses</span>
                             @else
-                                <span class="badge bg-danger">Ditolak</span>
+                                -
                             @endif
                         </td>
                     </tr>

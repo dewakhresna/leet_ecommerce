@@ -89,7 +89,7 @@ class TransaksiController extends Controller
         ]);
     
         Store::whereIn('id', $request->produk)
-             ->update(['status' => '1']);
+             ->update(['status' => '1', 'pesan' => '1']);
     
         return response()->json(['message' => 'Checkout berhasil']);
     }
@@ -126,7 +126,7 @@ class TransaksiController extends Controller
 
         Store::where('user_id', $user_id)
              ->where('status', '1')
-             ->update(['status' => '2', 'metode_pembayaran' => $request->metode_pembayaran, 'bukti_pembayaran' => $filename]);
+             ->update(['status' => '2', 'pesan' => '2' ,'metode_pembayaran' => $request->metode_pembayaran, 'bukti_pembayaran' => $filename]);
     
         return redirect()->route('user.home', ['id' => $user_id])
                          ->with('success', 'Pembayaran berhasil diproses!');

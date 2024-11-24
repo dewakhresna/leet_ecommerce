@@ -9,6 +9,7 @@ use App\Models\Admin;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class DashboardController extends Controller
 {
@@ -17,6 +18,41 @@ class DashboardController extends Controller
         $stores = Store::where('status', '!=', '0')
                         ->get();
         return view('admin.admin-transaksi', compact('stores'));
+    }
+
+    public function transaksiSukses(Request $request, $id)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'produk_id' => 'required',
+            'jumlah' => 'required',
+            'varian' => 'required',
+            'status' => 'required',
+            'pesan' => 'required',
+        ]);
+
+        Store::where('id', $id)
+             ->update(['status' => '3', 'pesan' => '3']);
+
+        $stoks = "stok" . $request->varian;
+
+        Produk::where('id', $request->produk_id)
+              ->decrement($stoks, $request->jumlah);
+
+        return redirect()->route('admin.transaksi');
+    }
+
+    public function transaksiGagal(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required',
+            'pesan' => 'required',
+        ]);
+
+        Store::where('id', $id)
+             ->update(['status' => '1', 'pesan' => '0']);
+
+        return redirect()->route('admin.transaksi');
     }
     
     public function index() 

@@ -45,6 +45,9 @@ Route::post('/admin/login', [DashboardController::class, 'login']);
 
 Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
 Route::get('/admin/transaksi', [DashboardController::class, 'transaksi'])->name('admin.transaksi');
+Route::post('/admin/transaksi/transaksi-sukses/{id}', [DashboardController::class, 'transaksiSukses'])->name('admin.transaksi-sukses');
+Route::post('/admin/transaksi/transaksi-gagal/{id}', [DashboardController::class, 'transaksiGagal'])->name('admin.transaksi-gagal');
+
 Route::get('/admin/profile', [DashboardController::class, 'profile'])->name('admin.profile');
 Route::get('admin/tambah-produk', [DashboardController::class, 'create'])->name('admin.tambah-produk');
 Route::post('admin/tambah-produk/store', [DashboardController::class, 'store'])->name('admin.tambah-produk.store');

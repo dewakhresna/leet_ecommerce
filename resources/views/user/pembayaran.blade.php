@@ -39,7 +39,7 @@
                                         <p class="card-text">Kategori: {{ $item->kategori }}</p>
                                         <p class="card-text">Jumlah: {{ $item->jumlah }}</p>
                                         <p class="card-text">Varian: {{ $item->varian }}</p>
-                                        <p class="card-text text-success">Harga: Rp {{ number_format($item->total_harga, 0, ',', '.') }}</p>
+                                        <p class="card-text">Harga: Rp {{ number_format($item->total_harga, 0, ',', '.') }}</p>
                                     </div>
                                 </div>
                             </div>
