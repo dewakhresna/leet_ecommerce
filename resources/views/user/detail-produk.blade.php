@@ -86,7 +86,7 @@
                 <input type="hidden" name="varian" id="form-varian" value="L"> <!-- Default variant -->
                 <input type="hidden" name="total_harga" id="form-total-harga" value="{{ $produk->harga }}" >
                 <input type="hidden" name="status" value="0">
-                <button type="submit" class="btn add-to-cart-btn mt-3 w-100">Beli</button>
+                <button type="submit" class="btn add-to-cart-btn mt-3 w-100">Tambahkan Ke Keranjang</button>
             </form>
         </div>
     </div>

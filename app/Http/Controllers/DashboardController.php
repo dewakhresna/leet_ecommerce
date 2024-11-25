@@ -42,13 +42,8 @@ class DashboardController extends Controller
         return redirect()->route('admin.transaksi');
     }
 
-    public function transaksiGagal(Request $request, $id)
+    public function transaksiGagal($id)
     {
-        $request->validate([
-            'status' => 'required',
-            'pesan' => 'required',
-        ]);
-
         Store::where('id', $id)
              ->update(['status' => '1', 'pesan' => '0']);
 

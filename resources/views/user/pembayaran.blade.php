@@ -50,9 +50,8 @@
                         <label for="metode_pembayaran" class="form-label">Metode Pembayaran</label>
                         <select class="form-select" name="metode_pembayaran" id="metode_pembayaran" required>
                             <option value="" disabled selected>Pilih Metode Pembayaran</option>
-                            <option value="Transfer Bank">Transfer Bank</option>
-                            <option value="E-Wallet">E-Wallet</option>
-                            <option value="Kartu Kredit">Kartu Kredit</option>
+                            <option value="Transfer Bank">Transfer Bank BCA = 57658764 a.n Leet Store</option>
+                            <option value="E-Wallet">E-Wallet = 0822-2345-6789</option>
                         </select>
                     </div>
                     <div class="mb-3">

@@ -68,6 +68,7 @@
                         <p>{{ $user->email }}</p>
                         <p>{{ $user->no_hp }}</p>
                         <a href="{{route('logout')}}" class="text-danger">Keluar</a>
+                        <a href="{{route('user.edit-profile', Auth::user()->id)}}" class="text-primary">Edit</a>
                     </div>
                 </div>
                 <p><strong>Alamat:</strong> {{ $user->alamat }}</p>

@@ -160,18 +160,21 @@
                     <img src="" id="buktiPembayaranImg" alt="Bukti Pembayaran" class="img-fluid">
                 </div>
                 <div class="modal-footer">
-                    <form id="transaksiForm" action="" method="POST" data-route="{{ route('admin.transaksi-sukses', ['id' => 'transaksi_id']) }}" enctype="multipart/form-data">
+                    <form id="transaksiForm" method="POST" data-route="{{ route('admin.transaksi-sukses', ['id' => 'transaksi_id']) }}">
                         @csrf
-                        <input type="hidden" name="id"  id="idTransaksi">
+                        <input type="hidden" name="id" id="idTransaksi">
                         <input type="hidden" name="user_id" id="pembeli">
                         <input type="hidden" name="produk_id" id="produk">
                         <input type="hidden" name="jumlah" id="jumlah">
                         <input type="hidden" name="varian" id="varian">
                         <input type="hidden" name="status" id="status">
-                        <input type="hidden" name="pesan"  id="pesan">
-                        <button type="submit" class="btn btn-primary" id="terimaPembayaran">Terima Pembayaran</button>
+                        <input type="hidden" name="pesan" id="pesan">
+                        <button type="submit" class="btn btn-primary">Terima Pembayaran</button>
                     </form>
-                    <button type="button" class="btn btn-danger">Tolak Pembayaran</button>
+                    <form id="transaksiFormGagal" method="POST" data-routeGagal="{{ route('admin.transaksi-gagal', ['id' => 'transaksi_idGagal']) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Tolak Pembayaran</button>
+                    </form>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -183,6 +186,7 @@
     <script>
         document.querySelectorAll('.lihat-bukti-btn').forEach(button => {
             button.addEventListener('click', function () {
+                // Ambil atribut data dari tombol
                 const idTransaksi = this.getAttribute('id-transaksi');
                 const pembeli = this.getAttribute('data-pembeli');
                 const produk = this.getAttribute('data-produk');
@@ -192,7 +196,7 @@
                 const pesan = this.getAttribute('data-pesan');
                 const gambar = this.getAttribute('data-gambar');
 
-                const transaksiID = document.getElementById('idTransaksi');
+                // Set nilai ke form
                 document.getElementById('idTransaksi').value = idTransaksi;
                 document.getElementById('pembeli').value = pembeli;
                 document.getElementById('produk').value = produk;
@@ -200,12 +204,21 @@
                 document.getElementById('varian').value = varian;
                 document.getElementById('status').value = status;
                 document.getElementById('pesan').value = pesan;
+
+                // Tampilkan gambar bukti pembayaran
                 document.getElementById('buktiPembayaranImg').setAttribute('src', gambar);
 
+                // Perbarui route form sukses
                 const form = document.getElementById('transaksiForm');
                 const routeTemplate = form.getAttribute('data-route');
                 const updatedRoute = routeTemplate.replace('transaksi_id', idTransaksi);
                 form.setAttribute('action', updatedRoute);
+
+                // Perbarui route form gagal
+                const formGagal = document.getElementById('transaksiFormGagal');
+                const routeTemplateGagal = formGagal.getAttribute('data-routeGagal');
+                const updatedRouteGagal = routeTemplateGagal.replace('transaksi_idGagal', idTransaksi);
+                formGagal.setAttribute('action', updatedRouteGagal);
             });
         });
     </script>
