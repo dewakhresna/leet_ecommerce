@@ -88,8 +88,8 @@
                     <th>Varian</th>
                     <th>Kategori</th>
                     <th>Metode Pembayaran</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
+                    <th>Status Pembayaran</th>
+                    <th>Status Pesanan</th>
                 </tr>
             </thead>
             <tbody>
@@ -107,29 +107,42 @@
                         <td>{{ $store->varian }}</td>
                         <td>{{ $store->kategori }}</td>
                         <td>
-                            @if ($store->pesan == 2)
+                            @if($store->status == 1 && $store->pesan == 0)
                                 {{ $store->metode_pembayaran }}
-                            @elseif ($store->pesan == 3)
+                            @elseif ($store->status == 2)
+                                {{ $store->metode_pembayaran }}
+                            @elseif ($store->status == 3)
                                 {{ $store->metode_pembayaran }}
                             @else
                                 -
                             @endif
                         </td>
                         <td>
-                            @if ($store->pesan == 1)
+                            @if($store->status == 1 && $store->pesan == 0)
+                                <span class="badge bg-danger">Pembayaran Ditolak</span>
+                            @elseif ($store->status == 1)
                                 <span class="badge bg-warning">Menunggu Pembayaran</span>
-                            @elseif ($store->pesan == 2)
-                                <span class="badge bg-success">Pembayaran Sedang Diproses</span>
-                            @elseif ($store->pesan == 3)
-                                <span class="badge bg-success">Pesanan Dikirim Menuju Alamat Anda</span>
+                            @elseif ($store->status == 2)
+                                <span class="badge bg-info">Pembayaran Sedang Diproses</span>
+                            @elseif ($store->status == 3)
+                                <span class="badge bg-success">Pembayaran Berhasil</span>
                             @else
-                                <span class="badge bg-danger">Ditolak</span>
+                                -
                             @endif
                         </td>
                         <td>
-                            @if ($store->status == 1)
+                            @if($store->status == 1 && $store->pesan == 0)
+                                <a href="{{ route('user.pembayaran', $store->user_id) }}" class="btn btn-primary btn-sm">Lakukan Pembayaran Ulang</a>
+                                <a href="{{ route('user.pesanan-delete', ['user_id' => $store->user_id, 'id' => $store->id]) }}" class="btn btn-danger btn-sm">Hapus Pesanan</a>
+                            @elseif ($store->pesan == 1)
                                 <a href="{{ route('user.pembayaran', $store->user_id) }}" class="btn btn-primary btn-sm">Lakukan Pembayaran</a>
                                 <a href="{{ route('user.pesanan-delete', ['user_id' => $store->user_id, 'id' => $store->id]) }}" class="btn btn-danger btn-sm">Hapus Pesanan</a>
+                            @elseif ($store->pesan == 3)
+                                <span class="badge bg-success">Pesanan Sedang Disiapkan</span>
+                            @elseif ($store->pesan == 4)
+                                <span class="badge bg-success">Pesanan Dikirim</span>
+                            @elseif ($store->pesan == 5)
+                                <span class="badge bg-success">Pesanan Sudah Sampai Tujuan</span>
                             @else
                                 -
                             @endif

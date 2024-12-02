@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use App\Models\Store;
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -16,8 +16,21 @@ class DashboardController extends Controller
     public function transaksi()
     {
         $stores = Store::where('status', '!=', '0')
+                        ->where('status', '!=', '1')
+                        ->orWhere('pesan', '=', '0')
                         ->get();
         return view('admin.admin-transaksi', compact('stores'));
+    }
+
+    public function transaksiDetail($id)
+    {
+        $store = Store::where('id', $id)
+                      ->where('status', '!=', '0')
+                      ->where('status', '!=', '1')
+                      ->first();
+        
+        $user = User::where('id', $store->user_id)->first();              
+        return view('admin.admin-transaksi-detail', compact('store', 'user'));
     }
 
     public function transaksiSukses(Request $request, $id)
@@ -46,6 +59,18 @@ class DashboardController extends Controller
     {
         Store::where('id', $id)
              ->update(['status' => '1', 'pesan' => '0']);
+
+        return redirect()->route('admin.transaksi');
+    }
+
+    public function transaksiProses(Request $request, $id)
+    {
+        $request->validate([
+            'pesan' => 'required',
+        ]);
+
+        Store::where('id', $id)
+             ->update(['pesan' => $request->pesan]);
 
         return redirect()->route('admin.transaksi');
     }
@@ -162,12 +187,25 @@ class DashboardController extends Controller
         return redirect()->route('admin')->with('success', 'Produk Berhasil Dihapus');
     }
 
-    public function login(Request $request)
+    public function showLoginForm()
     {
-        if ($request->email === 'admin@gmail.com' && $request->password === '123') {
-            return redirect()->route('admin');
+        return view('admin.admin-login');
+    }
+
+    public function processLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $email = $request->email;
+        $password = $request->password;
+
+        if ($email === 'admin@gmail.com' && $password === '123') {
+            return redirect()->route('admin')->with('success', 'Login berhasil!');
         }
 
-        return back()->withErrors(['email' => 'Invalid email or password.']);
+        return back()->withErrors(['login' => 'Email atau password salah'])->withInput();
     }
 }

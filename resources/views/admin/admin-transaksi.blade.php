@@ -54,14 +54,15 @@
     </style>
 </head>
 <body>
-    <h3>Daftar Transaksi</h3>
+    <div>
+        <h3>Daftar Transaksi</h3>
+        <button><a href="{{ route('admin') }}" class="btn btn-primary">Kembali</a></button>
+    </div>
     <div class="container">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Id Pembeli</th>
-                    <th>Id Produk</th>
                     <th>Info Produk</th>
                     <th>Harga</th>
                     <th>Jumlah</th>
@@ -70,14 +71,13 @@
                     <th>Metode Pembayaran</th>
                     <th>Bukti Pembayaran</th>
                     <th>Status</th>
+                    <th>Detail</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($stores as $index => $store)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $store->user_id }}</td>
-                        <td>{{ $store->produk_id }}</td>
                         <td>
                             <div class="info-produk">
                                 <img src="{{ asset('storage/assets/produk/' . $store->gambar0) }}" alt="{{ $store->nama_produk }}" style="width: 50px; height: 50px;">
@@ -89,7 +89,9 @@
                         <td>{{ $store->varian }}</td>
                         <td>{{ $store->kategori }}</td>
                         <td>
-                            @if ($store->status == 2)
+                            @if($store->status == 1 && $store->pesan == 0)
+                                {{ $store->metode_pembayaran }}
+                            @elseif ($store->status == 2)
                                 {{ $store->metode_pembayaran }}
                             @elseif ($store->status == 3)
                                 {{ $store->metode_pembayaran }}
@@ -98,17 +100,17 @@
                             @endif
                         </td>    
                         <td>
-                            @if ($store->status == 2)
+                            @if($store->status == 1 && $store->pesan == 0)
+                            <button type="button" class="btn btn-primary lihat-bukti-btn" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#buktiPembayaranModal" 
+                                data-gambar="{{ asset('storage/assets/bukti_pembayaran/' . $store->bukti_pembayaran) }}">
+                                Lihat
+                            </button>
+                            @elseif ($store->status == 2)
                                 <button type="button" class="btn btn-primary lihat-bukti-btn" 
                                     data-bs-toggle="modal" 
                                     data-bs-target="#buktiPembayaranModal" 
-                                    id-transaksi="{{ $store->id }}"
-                                    data-pembeli="{{ $store->user_id }}"
-                                    data-produk="{{ $store->produk_id }}"
-                                    data-jumlah="{{ $store->jumlah }}"
-                                    data-varian="{{ $store->varian }}"
-                                    data-status="{{ $store->status }}"
-                                    data-pesan="{{ $store->pesan }}"
                                     data-gambar="{{ asset('storage/assets/bukti_pembayaran/' . $store->bukti_pembayaran) }}">
                                     Lihat
                                 </button>
@@ -116,13 +118,6 @@
                                 <button type="button" class="btn btn-primary lihat-bukti-btn" 
                                     data-bs-toggle="modal" 
                                     data-bs-target="#buktiPembayaranModal" 
-                                    id-transaksi="{{ $store->id }}"
-                                    data-pembeli="{{ $store->user_id }}"
-                                    data-produk="{{ $store->produk_id }}"
-                                    data-jumlah="{{ $store->jumlah }}"
-                                    data-varian="{{ $store->varian }}"
-                                    data-status="{{ $store->status }}"
-                                    data-pesan="{{ $store->pesan }}"
                                     data-gambar="{{ asset('storage/assets/bukti_pembayaran/' . $store->bukti_pembayaran) }}"
                                     >
                                     Lihat
@@ -135,11 +130,24 @@
                             @if ($store->pesan == 1)
                                 <span class="badge bg-warning text-dark">Pembayaran Belum Dilakukan</span>
                             @elseif ($store->pesan == 2)
-                                <span class="badge bg-success">Pembayaran Sudah Dilakukan</span>
+                                <span class="badge bg-warning text-dark">Menunggu Konfirmasi</span>
                             @elseif ($store->pesan == 3)
+                                <span class="badge bg-success">Pesanan Sedang Disiapkan</span>
+                            @elseif ($store->pesan == 4)
                                 <span class="badge bg-success">Pesanan Dikirim</span>
+                            @elseif ($store->pesan == 5)
+                                <span class="badge bg-success">Pesanan Sudah Sampai Tujuan</span>
                             @else
-                                <span class="badge bg-danger">Ditolak</span>
+                                <span class="badge bg-danger">Pembayaran Ditolak</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if($store->status == 2)
+                                <a href="{{ route('admin.transaksi-detail', ['id' => $store->id]) }}" class="btn btn-primary btn-sm">Lihat</a>
+                            @elseif($store->status == 3)
+                                <a href="{{ route('admin.transaksi-detail', ['id' => $store->id]) }}" class="btn btn-primary btn-sm">Lihat</a>
+                            @else
+                                -
                             @endif
                         </td>
                     </tr>
@@ -159,24 +167,6 @@
                 <div class="modal-body">
                     <img src="" id="buktiPembayaranImg" alt="Bukti Pembayaran" class="img-fluid">
                 </div>
-                <div class="modal-footer">
-                    <form id="transaksiForm" method="POST" data-route="{{ route('admin.transaksi-sukses', ['id' => 'transaksi_id']) }}">
-                        @csrf
-                        <input type="hidden" name="id" id="idTransaksi">
-                        <input type="hidden" name="user_id" id="pembeli">
-                        <input type="hidden" name="produk_id" id="produk">
-                        <input type="hidden" name="jumlah" id="jumlah">
-                        <input type="hidden" name="varian" id="varian">
-                        <input type="hidden" name="status" id="status">
-                        <input type="hidden" name="pesan" id="pesan">
-                        <button type="submit" class="btn btn-primary">Terima Pembayaran</button>
-                    </form>
-                    <form id="transaksiFormGagal" method="POST" data-routeGagal="{{ route('admin.transaksi-gagal', ['id' => 'transaksi_idGagal']) }}">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Tolak Pembayaran</button>
-                    </form>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
             </div>
         </div>
     </div>
@@ -186,39 +176,8 @@
     <script>
         document.querySelectorAll('.lihat-bukti-btn').forEach(button => {
             button.addEventListener('click', function () {
-                // Ambil atribut data dari tombol
-                const idTransaksi = this.getAttribute('id-transaksi');
-                const pembeli = this.getAttribute('data-pembeli');
-                const produk = this.getAttribute('data-produk');
-                const jumlah = this.getAttribute('data-jumlah');
-                const varian = this.getAttribute('data-varian');
-                const status = this.getAttribute('data-status');
-                const pesan = this.getAttribute('data-pesan');
                 const gambar = this.getAttribute('data-gambar');
-
-                // Set nilai ke form
-                document.getElementById('idTransaksi').value = idTransaksi;
-                document.getElementById('pembeli').value = pembeli;
-                document.getElementById('produk').value = produk;
-                document.getElementById('jumlah').value = jumlah;
-                document.getElementById('varian').value = varian;
-                document.getElementById('status').value = status;
-                document.getElementById('pesan').value = pesan;
-
-                // Tampilkan gambar bukti pembayaran
                 document.getElementById('buktiPembayaranImg').setAttribute('src', gambar);
-
-                // Perbarui route form sukses
-                const form = document.getElementById('transaksiForm');
-                const routeTemplate = form.getAttribute('data-route');
-                const updatedRoute = routeTemplate.replace('transaksi_id', idTransaksi);
-                form.setAttribute('action', updatedRoute);
-
-                // Perbarui route form gagal
-                const formGagal = document.getElementById('transaksiFormGagal');
-                const routeTemplateGagal = formGagal.getAttribute('data-routeGagal');
-                const updatedRouteGagal = routeTemplateGagal.replace('transaksi_idGagal', idTransaksi);
-                formGagal.setAttribute('action', updatedRouteGagal);
             });
         });
     </script>

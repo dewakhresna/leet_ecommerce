@@ -46,7 +46,6 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="new-arrivals">
-                    {{-- <h3 class="text-center">New Arrivals</h3> --}}
                     <div class="row mt-3">
                         <div class="col-7 mb-3">
                             <img src="{{ asset('assets/profile/banner_profil_1.png')}}" alt="New Arrival 1">
@@ -62,7 +61,7 @@
             </div>
             <div class="col-md-6">
                 <div class="profile-header">
-                    <img src="{{ $user->foto_profile ? asset('storage/' . $user->foto_profile) : asset("assets/icon/profile_icon.png") }}" alt="Profile Picture">
+                    <img src="{{ $user->foto_profile ? asset('storage/assets/profile/' . $user->foto_profile) : asset('assets/icon/profile_icon.png')}}" alt="Profile Picture">
                     <div>
                         <h5>{{ $user->name }}</h5>
                         <p>{{ $user->email }}</p>

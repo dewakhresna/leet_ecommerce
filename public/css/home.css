@@ -1,4 +1,12 @@
 /* public/css/home.css */
+ #beranda, #about, #lokasi {
+    padding-top: 170px; /* Sesuaikan dengan tinggi navbar */
+    margin-top: -170px; /* Sesuaikan dengan tinggi navbar */
+}
+
+.title-lokasi {
+    margin-top: 100px;
+}
 
 .custom-header {
     background-color: #cfebef;

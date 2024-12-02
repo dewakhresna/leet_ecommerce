@@ -3,7 +3,6 @@
       <div class="d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
           <img src="{{ asset('assets/logo/logo_leet.png') }}" alt="Logo" width="30" height="30" class="logo-img">
-
           @if(Auth::check())
             <span class="header-text status"><a href="{{ route('user.pesanan', Auth::user()->id) }}" class="text-decoration-none">Status Pesanan</a></span>
           @else

@@ -39,14 +39,19 @@
                                         <p class="card-text">Kategori: {{ $item->kategori }}</p>
                                         <p class="card-text">Jumlah: {{ $item->jumlah }}</p>
                                         <p class="card-text">Varian: {{ $item->varian }}</p>
-                                        <p class="card-text">Harga: Rp {{ number_format($item->total_harga, 0, ',', '.') }}</p>
+                                        <p class="card-text harga-produk" data-harga="{{ $item->total_harga }}">Harga: Rp {{ number_format($item->total_harga, 0, ',', '.') }}</p>
                                     </div>
                                 </div>
                             </div>
                             @endforeach
                         </div>
                     </section>
+
                     <div class="mb-3 mt-4">
+                        <label for="total_harga" class="form-label">Total Harga</label>
+                        <input type="text" class="form-control" id="total_harga" value="Rp 0" readonly>
+                    </div>
+                    <div class="mb-3">
                         <label for="metode_pembayaran" class="form-label">Metode Pembayaran</label>
                         <select class="form-select" name="metode_pembayaran" id="metode_pembayaran" required>
                             <option value="" disabled selected>Pilih Metode Pembayaran</option>
@@ -83,6 +88,19 @@
                     e.preventDefault();
                 }
             });
+
+            const produkCards = document.querySelectorAll('.harga-produk');
+            const totalHargaInput = document.getElementById('total_harga');
+            let totalHarga = 0;
+
+            // Loop melalui setiap produk untuk menjumlahkan harga
+            produkCards.forEach(card => {
+                const harga = parseInt(card.dataset.harga, 10); // Ambil data harga
+                totalHarga += harga; // Tambahkan ke total harga
+            });
+
+            // Format dan tampilkan total harga di input
+            totalHargaInput.value = 'Rp ' + new Intl.NumberFormat('id-ID').format(totalHarga);
         });
     </script>
 </body>

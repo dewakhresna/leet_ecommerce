@@ -29,28 +29,28 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $user->name) }}">
+                                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ $user->name }}">
                                 @error('name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" name="username" id="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username', $user->username) }}">
+                                <input type="text" name="username" id="username" class="form-control @error('username') is-invalid @enderror" value="{{ $user->username }}">
                                 @error('username')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}">
+                                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}">
                                 @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="no_hp" class="form-label">No HP</label>
-                                <input type="text" name="no_hp" id="no_hp" class="form-control @error('no_hp') is-invalid @enderror" value="{{ old('no_hp', $user->no_hp) }}">
+                                <input type="text" name="no_hp" id="no_hp" class="form-control @error('no_hp') is-invalid @enderror" value="{{ $user->no_hp }}">
                                 @error('no_hp')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -63,14 +63,11 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="image" class="form-label">Foto Profil</label>
-                                <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
-                                @error('image')
+                                <label for="foto_profile" class="form-label">Foto Profil</label>
+                                <input type="file" name="foto_profile" id="foto_profile" class="form-control @error('foto_profile') is-invalid @enderror">
+                                @error('foto_profile')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                @if($user->image)
-                                    <img src="{{ asset('storage/' . $user->image) }}" alt="Profile Image" class="mt-3 img-thumbnail" style="max-width: 150px;">
-                                @endif
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>

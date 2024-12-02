@@ -50,7 +50,7 @@
   @endforeach
 </div>
 
-<section id="about" class="mt-5 mb-5">
+<section id="about" class="mt-3 mb-3">
   <h1 class="text-center">Hi, LEET disini</h1>
   <p>
     Leet adalah brand clothing Indonesia yang mengedepankan gaya, kenyamanan, dan kreativitas.
@@ -63,7 +63,7 @@
 <section id="lokasi" class="mt-5">
   <div class="container">
     <div class="row mb-5 align-items-center">
-      <h1 class="text-center mb-5">Lokasi Kami</h1>
+      <h1 class="text-center mb-5 title-lokasi">Lokasi Kami</h1>
         <div class="col-md-8">
             <div class="map-container">
                 <iframe

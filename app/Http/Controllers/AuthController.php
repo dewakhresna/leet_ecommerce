@@ -47,6 +47,7 @@ class AuthController extends Controller
             'no_hp' => 'required',
             'alamat' => 'required',
             'password' => 'required',
+            'foto_profile' => 'required',
 
         ]);
 
@@ -58,8 +59,6 @@ class AuthController extends Controller
         $user->alamat = $request->alamat;
         $user->password = Hash::make($request->password); // Hashing password
         $user->save();
-
-        Auth::login($user); // Login otomatis setelah registrasi
-        return redirect()->route('user.home')->with('success', 'Registrasi berhasil!');
+        return redirect()->route('home')->with('success', 'Registrasi berhasil!');
     }
 }
