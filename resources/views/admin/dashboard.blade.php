@@ -23,7 +23,7 @@
                     <th>Harga</th>
                     <th>Stok</th>
                     <th>Kategori</th>
-                    <th>Action</th>
+                    <th>Aksi</th>
                 </tr>
                 @foreach ($produks as $index => $produk)
                     <tr>
@@ -40,7 +40,7 @@
                         <td>
                             <div class="dropdown">
                                 <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Action
+                                    Aksi
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="{{ route('admin.edit-produk', $produk->id) }}">Edit</a></li>

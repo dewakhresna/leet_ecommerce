@@ -17,7 +17,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Edit Profile</div>
+                    <div class="card-header">Edit Profil</div>
                     <div class="card-body">
                         @if (session('success'))
                             <div class="alert alert-success">
@@ -28,7 +28,7 @@
                         <form action="{{ route('user.update-profile', $user->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
+                                <label for="name" class="form-label">Nama</label>
                                 <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ $user->name }}">
                                 @error('name')
                                     <div class="invalid-feedback">{{ $message }}</div>
