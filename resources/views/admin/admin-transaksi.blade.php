@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pesanan - LEET</title>
+    <title>LEET</title>
+    <link rel="icon" href="{{ asset('assets/logo/logo_leet.png') }}" type="image/png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -14,8 +15,6 @@
             padding: 20px;
         }
         h3 {
-            text-align: center;
-            margin-bottom: 30px;
             color: #333;
             font-weight: bold;
         }
@@ -54,11 +53,19 @@
     </style>
 </head>
 <body>
-    <div>
-        <h3>Daftar Transaksi</h3>
-        <button><a href="{{ route('admin') }}" class="btn btn-primary">Kembali</a></button>
-    </div>
+    
     <div class="container">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <!-- Search Form -->
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            </form>
+
+            <!-- Center Title -->
+            <h3 class="m-0">Daftar Transaksi</h3>
+
+            <!-- Add Product Button -->
+            <button class="btn btn-primary"><a href="{{ route('admin') }}" class="text-white text-decoration-none">Kembali</a></button>
+        </div>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>

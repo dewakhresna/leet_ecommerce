@@ -30,8 +30,6 @@
             text-align: center;
         }
         .add-to-cart-btn {
-            background-color: black;
-            color: white;
             font-size: 18px;
             font-weight: bold;
         }
@@ -62,9 +60,9 @@
             <div class="mt-3">
                 <label for="quantity" class="form-label">Jumlah item</label>
                 <div class="input-group mb-3" style="width: 150px;">
-                    <button class="btn btn-outline-secondary" type="button" id="btn-minus">-</button>
+                    <button class="btn btn-outline-dark" type="button" id="btn-minus">-</button>
                     <input type="number" id="quantity" class="form-control text-center" value="1" min="1">
-                    <button class="btn btn-outline-secondary" type="button" id="btn-plus">+</button>
+                    <button class="btn btn-outline-dark" type="button" id="btn-plus">+</button>
                 </div>
             </div>
             
@@ -86,7 +84,7 @@
                 <input type="hidden" name="varian" id="form-varian" value="L"> <!-- Default variant -->
                 <input type="hidden" name="total_harga" id="form-total-harga" value="{{ $produk->harga }}" >
                 <input type="hidden" name="status" value="0">
-                <button type="submit" class="btn add-to-cart-btn mt-3 w-100">Tambahkan Ke Keranjang</button>
+                <button type="submit" class="btn btn-outline-dark add-to-cart-btn mt-3 w-100">Tambahkan Ke Keranjang</button>
             </form>
         </div>
     </div>

@@ -76,7 +76,7 @@
     </style>
 </head>
 <body>
-    <h3>Pesanan Anda</h3>
+    <h3>Status Pesanan</h3>
     <div class="container">
         <table class="table table-striped table-hover">
             <thead>

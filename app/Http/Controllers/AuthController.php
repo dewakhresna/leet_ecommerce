@@ -20,14 +20,23 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)){
             $userId = Auth::user()->id;
-            return redirect()->route('user.home', ['id' => $userId]);
+            $role = User::where('id', $userId)->value('role');
+
+            if($role == 1) {
+                return redirect()->route('user.home', ['id' => $userId]);
+            } elseif($role == 2) {
+                return redirect()->route('admin');
+            } else {
+                Auth::logout();
+                return redirect()->route('home')->with('error', 'Email atau password salah');
+            }
         } else {
+            Auth::logout();
             return redirect()->route('home')->with('error', 'Email atau password salah');
         }
     }
     public function logout()
     {
-        // dd('logout');
         Auth::logout();
         return redirect()->route('home')->with('success', 'Logout Berhasil');
     }
@@ -39,7 +48,6 @@ class AuthController extends Controller
 
     public function register_proses(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'name' => 'required',
             'username' => 'required',
@@ -47,8 +55,6 @@ class AuthController extends Controller
             'no_hp' => 'required',
             'alamat' => 'required',
             'password' => 'required',
-            'foto_profile' => 'required',
-
         ]);
 
         $user = new User();

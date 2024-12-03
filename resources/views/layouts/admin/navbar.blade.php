@@ -9,7 +9,7 @@
           <li><a href="{{ route('admin')}}" class="nav-link px-2 link-dark">Produk</a></li>
           <li><a href="{{ route('admin.transaksi')}}" class="nav-link px-2 link-dark">Transaksi</a></li>
         </ul>
-        <a href="{{ route('home') }}" class="btn btn-outline-success text-end">Logout</a>
+        <a href="{{ route('logout') }}" class="btn btn-outline-danger text-end">Logout</a>
       </div>
     </div>
 </header>

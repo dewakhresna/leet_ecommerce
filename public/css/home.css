@@ -1,7 +1,6 @@
-/* public/css/home.css */
  #beranda, #about, #lokasi {
-    padding-top: 170px; /* Sesuaikan dengan tinggi navbar */
-    margin-top: -170px; /* Sesuaikan dengan tinggi navbar */
+    padding-top: 170px; 
+    margin-top: -170px; 
 }
 
 .title-lokasi {
@@ -11,7 +10,7 @@
 .custom-header {
     background-color: #cfebef;
     padding: 1rem;
-    position: relative; /* Ensure header stays at the top */
+    position: relative; 
     z-index: 10;
 }
 
@@ -31,9 +30,9 @@
     padding: 0.8rem;
     position: -webkit-sticky;
     position: sticky;
-    top: 0; /* Navbar will stick to the top when scrolling down */
-    z-index: 9; /* Ensures navbar stays above main content but below header */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for visual separation */
+    top: 0; 
+    z-index: 9; 
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .custom-navbar ul li a {
@@ -45,21 +44,18 @@
     text-decoration: none;
 }
 
-/* Ensure container padding so the navbar doesn't overlap with the header */
 .container {
     margin-top: 1rem;
 }
 
-/* Styling when navbar is fixed */
 .is-sticky {
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 8;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Shadow when sticky */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
-/* Menyesuaikan warna kontrol carousel */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-color: rgba(
@@ -67,19 +63,17 @@
         0,
         0,
         0.5
-    ); /* Memberikan latar belakang gelap agar lebih terlihat */
+    ); 
     border-radius: 50%;
 }
 
-/* Menyesuaikan warna indikator carousel */
 .carousel-indicators button {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
 .carousel-indicators .active {
-    background-color: #000; /* Warna indikator aktif */
+    background-color: #000; 
 }
-
 
 #lokasi {
     padding: 50px 0;

@@ -42,7 +42,7 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h2 class="text-center">Account Saya</h2>
+        <h2 class="text-center mb-3">Akun Saya</h2>
         <div class="row">
             <div class="col-md-6">
                 <div class="new-arrivals">

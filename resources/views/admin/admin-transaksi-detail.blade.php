@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LEET</title>
+    <link rel="icon" href="{{ asset('assets/logo/logo_leet.png') }}" type="image/png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -273,7 +274,6 @@
                         @csrf
                         <button type="submit" class="btn btn-danger" @if($store['status'] == 3) disabled @endif>Tolak Pembayaran</button>
                     </form>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

@@ -19,7 +19,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register-proses', [AuthController::class, 'register_proses'])->name('register-proses');
 
-
 Route::get('/user/home/{id}', [HomeController::class, 'login'])->name('user.home');
 Route::get('/user/produk/{id}', [HomeController::class, 'produk'])->name('user.produk');
 Route::get('/user/profile/{id}', [UserController::class, 'index'])->name('user.profile');
@@ -39,10 +38,6 @@ Route::post('/user/home/{user_id}/pembayaran-proses', [TransaksiController::clas
 Route::get('/user/home/{user_id}/pesanan', [TransaksiController::class, 'pesanan'])->name('user.pesanan');
 Route::get('/user/home/{user_id}/pesanan/delete-pesanan/{id}', [TransaksiController::class, 'destroy'])->name('user.pesanan-delete');
 
-Route::get('/admin/login', [DashboardController::class, 'showloginform']);
-Route::post('admin/login-proses', [DashboardController::class, 'processLogin'])->name('admin.login-proses');
-
-
 Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
 Route::get('/admin/transaksi', [DashboardController::class, 'transaksi'])->name('admin.transaksi');
 Route::get('/admin/transaksi/transaksi-detail/{id}', [DashboardController::class, 'transaksiDetail'])->name('admin.transaksi-detail');
@@ -50,7 +45,6 @@ Route::post('/admin/transaksi/transaksi-sukses/{id}', [DashboardController::clas
 Route::post('/admin/transaksi/transaksi-gagal/{id}', [DashboardController::class, 'transaksiGagal'])->name('admin.transaksi-gagal');
 Route::post('/admin/transaksi/transaksi-proses/{id}', [DashboardController::class, 'transaksiProses'])->name('admin.transaksi-proses');
 
-Route::get('/admin/profile', [DashboardController::class, 'profile'])->name('admin.profile');
 Route::get('admin/tambah-produk', [DashboardController::class, 'create'])->name('admin.tambah-produk');
 Route::post('admin/tambah-produk/store', [DashboardController::class, 'store'])->name('admin.tambah-produk.store');
 Route::get('admin/edit-produk/{id}', [DashboardController::class, 'edit'])->name('admin.edit-produk');

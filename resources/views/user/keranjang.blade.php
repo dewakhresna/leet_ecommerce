@@ -11,8 +11,8 @@
         .keranjang-item { display: flex; align-items: center; margin-bottom: 15px; }
         .keranjang-item img { width: 80px; height: 80px; margin-right: 15px; }
         .keranjang-total { font-size: 1.5rem; font-weight: bold; }
-        .bayar-btn { background-color: #ff6600; color: #fff; border: none; padding: 10px 20px; }
-        .bayar-btn:hover { background-color: #ff8500; }
+        .bayar-btn { background-color: #ffffff; color: #000000; padding: 10px 20px; }
+        .bayar-btn:hover { background-color: #000000; color: #ffffff; }
     </style>
     <script>
         $.ajaxSetup({
@@ -29,6 +29,7 @@
             <!-- Produk keranjang akan dimuat di sini -->
         </div>
         <div class="mt-4 text-end">
+            
             <div class="keranjang-total">TOTAL: Rp <span id="totalHarga">0</span></div>
             <button id="btnBayar" class="bayar-btn mt-3">BAYAR</button>
         </div>

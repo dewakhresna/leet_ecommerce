@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use App\Models\Store;
 use App\Models\User;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -88,7 +89,6 @@ class DashboardController extends Controller
     }
 
     public function store(Request $request){
-        // dd($request->all());
         $validator = Validator::make($request->all(),[
             'namaProduk' => 'required',
             'kategori' => 'required',
@@ -157,7 +157,6 @@ class DashboardController extends Controller
 
         $produk = Produk::findOrFail($id);
         
-        // Update data produk
         $produk->nama_produk = $request->namaProduk;
         $produk->kategori = $request->kategori;
         $produk->deskripsi = $request->deskripsi;
@@ -185,27 +184,5 @@ class DashboardController extends Controller
         $produk = Produk::findOrFail($id);
         $produk->delete();
         return redirect()->route('admin')->with('success', 'Produk Berhasil Dihapus');
-    }
-
-    public function showLoginForm()
-    {
-        return view('admin.admin-login');
-    }
-
-    public function processLogin(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $email = $request->email;
-        $password = $request->password;
-
-        if ($email === 'admin@gmail.com' && $password === '123') {
-            return redirect()->route('admin')->with('success', 'Login berhasil!');
-        }
-
-        return back()->withErrors(['login' => 'Email atau password salah'])->withInput();
     }
 }

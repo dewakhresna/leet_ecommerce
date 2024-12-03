@@ -1,13 +1,11 @@
-/* public/css/dashboard.css */
-
 .custom-navbar {
     background-color: #ffffff;
     padding: 0.8rem;
     position: -webkit-sticky;
     position: sticky;
-    top: 0; /* Navbar will stick to the top when scrolling down */
-    z-index: 9; /* Ensures navbar stays above main content but below header */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for visual separation */
+    top: 0;
+    z-index: 9;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .custom-navbar ul li a {
@@ -19,12 +17,10 @@
     text-decoration: none;
 }
 
-/* Ensure container padding so the navbar doesn't overlap with the header */
 .container {
     margin-top: 1rem;
 }
 
-/* Styling when navbar is fixed */
 .is-sticky {
     position: fixed;
     width: 100%;
@@ -46,8 +42,8 @@
     white-space: nowrap;
 }
 
-/* Style table headers and center align text */
-table th, table td {
+table th,
+table td {
     text-align: center;
     vertical-align: middle;
 }
@@ -60,7 +56,7 @@ table th, table td {
 }
 
 .info-produk img {
-    width: 100px; /* Menyediakan ukuran standar untuk gambar */
+    width: 100px;
     height: auto;
     border-radius: 5px;
 }
@@ -84,20 +80,20 @@ table th, table td {
 
 /* Tambah Produk */
 .tambah-produk .row {
-    align-items: center; /* Menyelaraskan elemen di dalam baris secara vertikal */
+    align-items: center;
 }
 
 .tambah-produk .d-flex {
-    display: flex; /* Memastikan elemen dalam flexbox */
-    align-items: center; /* Menyelaraskan dropdown dan input secara vertikal */
-    gap: 1rem; /* Jarak antara dropdown dan input */
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 /* Styling untuk varian, input harga, dan tombol tambah dalam satu baris */
 .tambah-produk .row.varian-wrapper {
-    display: flex; /* Memastikan varian-wrapper menggunakan flexbox */
-    align-items: center; /* Menyelaraskan konten secara vertikal */
-    gap: 1rem; /* Jarak antar elemen */
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .tambah-produk .varian-wrapper select,
@@ -161,11 +157,5 @@ table th, table td {
 
 /* Button styling */
 .varian-item .btn {
-    /* /* padding: auto; */
-    font-size: 15px; 
-    /* flex-shrink: 0; Prevent the button from shrinking */
+    font-size: 15px;
 }
-
-
-
-
